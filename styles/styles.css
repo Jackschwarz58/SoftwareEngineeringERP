@@ -260,9 +260,6 @@ footer {
     padding-bottom: 10px;
     border:none;
 }
-.sidebar-bottom:hover {
-    cursor: pointer;   
-}
 
 #sidebar-icon {
     vertical-align:middle; 
@@ -302,5 +299,13 @@ footer {
 }
 
 .tabulator-tableHolder {
-  max-height: 83vh; !important;
+    max-height: 83vh; !important;
+}
+
+#download-button {
+    background: none;
+    border:none;
+    color:white;
+    font-size: 1vw;
+    font-family: 'Lato', sans-serif;
 }

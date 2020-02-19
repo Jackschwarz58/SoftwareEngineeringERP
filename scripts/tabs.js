@@ -1,5 +1,6 @@
 var editModal = document.getElementById("editModal");
 var addModal = document.getElementById("addModal");
+var downloadButton = document.getElementById("download-button");
 
 //Dummy Table Data
 var tableData = [
@@ -79,4 +80,8 @@ function clearModalFields(field1, field2, field3, field4) {
     field2.value = "";
     field3.value = "";
     field4.value = "";
+}
+downloadButton.onclick = function() {
+    console.log("Download Clicked");
+    table.download("csv", "data.csv");
 }
