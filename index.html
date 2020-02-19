@@ -5,18 +5,15 @@
         <link rel="stylesheet" href="styles/styles.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300&display=swap">
         <link rel="stylesheet" href="https://unpkg.com/tabulator-tables@4.5.3/dist/css/tabulator.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.5.3/dist/js/tabulator.min.js"></script>
         <script type="text/javascript" src="scripts/script.js" async></script>
         <script type="text/javascript" src="scripts/tabs.js" async></script>
         <script type="text/javascript" src="scripts/main.js" async></script>
+
     </head>
     <body>
-        <header>
-            ERP Website
-            <button id="openAdd">Add New Item</button>
-        </header>
-        
-        
+
         <!-- ////////////////////Modals Hidden for Later Activation//////////////////// -->
         <div id="addModal" class="modal">
             <div class="modal-content">
@@ -25,24 +22,24 @@
                 <form id="addNewForm">
                     <span class="modal-subheading">Name:</span><br>
                     <input placeholder="Name..." class="input-field" type="text" name="name"><br>
-                    
+
                     <span class="modal-subheading quantity-box">Quantity:</span><br>
                     <input placeholder="10" class="input-field-number" type="number" min="0"><br>
-                    
+
                     <span class="modal-subheading">Description: </span><br>
                     <textarea placeholder="Item Description..." class="input-field-large" type="text" name="desc" rows="4" cols="50"></textarea> <br>
-                    
+
                     <span class="modal-subheading">Tags: </span><br>
                     <input placeholder="Tag 1,Tag 2,..."class="input-field" type="text" name="tags"><br>
                 </form>
-                
+
                 <div class="modal-footer">
                     <button class="modal-button close" id="confirmAdd" onclick="addNew()">Add</button>placeholder
                     <button class="modal-button close" id="cancelAdd">Cancel</button>
                 </div>
             </div>
         </div>
-        
+
         <div id="editModal" class="modal">
             <div class="modal-content">
                 <span class="close-edit">&times;</span>
@@ -50,17 +47,17 @@
                 <form id="editForm">
                     <span class="modal-subheading" id="editName">Name:</span><br>
                     <input id="editNameInput" placeholder="Name..." class="input-field" type="text" name="name"><br>
-                    
+
                     <span class="modal-subheading quantity-box" id="editQuan">Quantity:</span><br>
                     <input id="editQuanInput" placeholder="10" class="input-field-number" type="number" min="0"><br>
-                    
+
                     <span class="modal-subheading" id="editDesc">Description:</span><br>
                     <textarea id="editDescInput" placeholder="Item Description..." class="input-field-large" type="text" name="desc" rows="4" cols="50"></textarea> <br>
-                    
+
                     <span class="modal-subheading" id="editTags">Tags:</span><br>
                     <input id="editTagsInput" placeholder="Tag 1,Tag 2,..."class="input-field" type="text" name="tags"><br>
                 </form>
-                
+
                 <div class="modal-footer">
                     <button class="modal-button close" id="confirm-edit">Add</button>placeholder
                     <button class="modal-button close" id="cancel-edit">Cancel</button>
@@ -68,24 +65,49 @@
             </div>
         </div>
         <!-- ////////////////////End of Modal Section//////////////////// -->
+
+
+
+        <div class ="wrapper">    
+            <div class = "sidebar">
+                <div class="site-title">
+                    <span style="color:aqua">ERP</span>Website
+                </div>
+                <nav>
+                    <div class="nav-link" id="activities"><i class="material-icons" id="sidebar-icon">dashboard</i>Dashboard</div>
+                    <div class="nav-link" id="transactions"><i class="material-icons" id="sidebar-icon">list_alt</i>Inventory</div>
+                    <div class="nav-link" id="lists"><i class="material-icons" id="sidebar-icon">check</i>Lists</div>
+                    <div class="nav-link" id="reports"><i class="material-icons" id="sidebar-icon">pie_chart</i>Reports</div>
+                    <div class="nav-link" id="analytics"><i class="material-icons" id="sidebar-icon">insert_chart</i>Analytics</div>
+                    <div class="nav-link" id="documents"><i class="material-icons" id="sidebar-icon">insert_drive_file</i>Documents</div>
+                </nav>
+                <div class="sidebar-bottom">
+                    <i class="material-icons" id="sidebar-cloud-icon">cloud_download</i> <span>Download Data</span>
+                </div>
+            </div>
+
+            
+            <div class="main">
+                <div class="page-header" id="dashboard-banner">
+                    <div id="banner-title">Dashboard</div>
+                    <div class="table-actions">
+                        <button type="button" class="table-button"><i class="material-icons" id="table-icon">add</i></button>
+                        <button type="button" class="table-button"><i class="material-icons" id="table-icon">edit</i></button>
+                        <button type="button" class="table-button"><i class="material-icons" id="table-icon">delete</i></button>
+                    </div>
+                </div>
+                
+                <div class="inner">
+                    This is the inner Div (Break line, Tabulator below, then iFrame after)<br>Don't forget to move the "Add New Items" Button!
+                    <div id="example-table"></div>
+                    
+                    <iframe id="frame">
+                    </iframe>
+                    
+                </div>
+            </div>
+        </div>
         
-        
-        <section class="outer">
-            <nav>
-                <div class="nav-link" id="activities">Activities</div>
-                <div class="nav-link" id="transactions">Transactions</div>
-                <div class="nav-link" id="lists">Lists</div>
-                <div class="nav-link" id="reports">Reports</div>
-                <div class="nav-link" id="analytics">Analytics</div>
-                <div class="nav-link" id="documents">Documents</div>
-            </nav>
-            <section class="inner">
-                This is the inner Div (Break line, Tabulator below, then iFrame after)<br>Don't forget to move the "Add New Items" Button!
-                <div id="example-table"></div>
-                <iframe id="frame">
-                </iframe>
-            </section>
-        </section>
         <footer>
             &copy; ERP Website - 2020
         </footer>
