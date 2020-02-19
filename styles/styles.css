@@ -1,6 +1,6 @@
 html, body {
-    height: 100%;
     margin:0;
+    height:100%;
 }
 
 body {
@@ -73,6 +73,7 @@ footer {
 
 .inner {
     padding:15px;
+    width: 97.5%;
 }
 
 .page-header {
@@ -297,4 +298,9 @@ footer {
 .table-actions {
     width: 20%;
     text-align: right;
+    position:static;
+}
+
+.tabulator-tableHolder {
+  max-height: 83vh; !important;
 }
