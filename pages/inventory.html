@@ -2,11 +2,14 @@
 <html lang="en">
     <head>
         <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.5.3/dist/js/tabulator.min.js"></script>
-        <script type="text/javascript" src="scripts/script.js" async></script>
-        <script type="text/javascript" src="scripts/tabs.js" async></script>
-        <script type="text/javascript" src="scripts/main.js" async></script>
-        <link rel="stylesheet" href="styles/reset.css">
-        <link rel="stylesheet" href="styles/styles.css">
+        
+        <script type="text/javascript" src="../scripts/script.js" async></script>
+        <script type="text/javascript" src="../scripts/tabs.js" async></script>
+        <script type="text/javascript" src="../scripts/sidebar.js" async></script>
+        
+        <link rel="stylesheet" href="../styles/reset.css">
+        <link rel="stylesheet" href="../styles/styles.css">
+        
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300&display=swap">
         <link rel="stylesheet" href="https://unpkg.com/tabulator-tables@4.5.3/dist/css/tabulator.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -58,7 +61,7 @@
                 </form>
 
                 <div class="modal-footer">
-                    <button class="modal-button close" id="confirm-edit">Apply</button>
+                    <button class="modal-button close" id="confirm-edit" onclick="applyEdit()">Apply</button>
                     <button class="modal-button close" id="cancel-edit">Cancel</button>
                 </div>
             </div>
@@ -73,8 +76,8 @@
                     <span style="color:aqua">ERP</span>Project
                 </div>
                 <nav>
-                    <div class="nav-link" id="activities"><i class="material-icons" id="sidebar-icon">dashboard</i>Dashboard</div>
-                    <div class="nav-link" id="transactions"><i class="material-icons" id="sidebar-icon">list_alt</i>Inventory</div>
+                    <div class="nav-link" id="dashboard"><i class="material-icons" id="sidebar-icon"><a href="dashboard.html" class="sidebar-link">dashboard</i>Dashboard</a></div>
+                    <div class="nav-link" id="inventory"><i class="material-icons" id="sidebar-icon">list_alt</i>Inventory</div>
                     <div class="nav-link" id="lists"><i class="material-icons" id="sidebar-icon">check</i>Lists</div>
                     <div class="nav-link" id="reports"><i class="material-icons" id="sidebar-icon">pie_chart</i>Reports</div>
                     <div class="nav-link" id="analytics"><i class="material-icons" id="sidebar-icon">insert_chart</i>Analytics</div>
@@ -89,9 +92,10 @@
             <div class="main">
                 <div class="page-header" id="dashboard-banner">
                     <div id="banner-title">Inventory</div>
-                    <div class="table-actions">
-                        <button type="button" class="table-button" id="openAdd"><i class="material-icons" id="table-icon">add</i></button>
-                        <button type="button" class="table-button"><i class="material-icons" id="table-icon">delete</i></button>
+                    <div class="top-actions">
+                        <button type="button" class="table-button" id="openAdd"><i class="material-icons" id="table-icon" title="Add Item">add</i></button>
+                        
+                        <button type="button" class="table-button"><i class="material-icons" id="table-icon" title="Delete Item">delete</i></button>
                     </div>
                 </div>
                 

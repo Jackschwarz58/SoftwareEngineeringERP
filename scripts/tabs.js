@@ -1,6 +1,6 @@
 var editModal = document.getElementById("editModal");
 var addModal = document.getElementById("addModal");
-var downloadButton = document.getElementById("download-button");
+var rowClicked = "";
 
 //Dummy Table Data
 var tableData = [
@@ -27,16 +27,27 @@ var tableData = [
     {id:21, name:"Denim Jacket (S)", quan:"278", desc:"Nike Black Jacket; Front Zipper", tags:"Small,Jacket,Denim,Male,On Sale", ex:"$79.99"},
     {id:22, name:"Forest Green Jacket (L)", quan:"312", desc:"Nike Forest Green Jacket; Front Zipper; Jordan Brand", tags:"Large,Jacket,Forest,Jordan,Male,On Sale", ex:"$59.99"},
     {id:23, name:"Forest Green Jacket (M)", quan:"287", desc:"Nike Forest Green Jacket; Front Zipper; Jordan Brand", tags:"Medium,Jacket,Forest,Jordan,Male,On Sale", ex:"$59.99"},
-    {id:24, name:"Forrest Green Jacket (S)", quan:"303", desc:"Nike Forest Green Jacket; Front Zipper; Jordan Brand", tags:"Small,Jacket,Forest,Jordan,Male,On Sale", ex:"$59.99"}
+    {id:24, name:"Forrest Green Jacket (S)", quan:"303", desc:"Nike Forest Green Jacket; Front Zipper; Jordan Brand", tags:"Small,Jacket,Forest,Jordan,Male,On Sale", ex:"$59.99"},
+    {id:25, name:"Grey Hoodie (L)", quan:"121", desc:"Wool Grey Hoodie; Cold-Tech; New Pocket Deisgn", tags:"Large,Hoodie,Grey,Unisex,Cold-Tech", ex:"$89.99"},
+    {id:26, name:"Grey Hoodie (M)", quan:"237", desc:"Wool Grey Hoodie; Cold-Tech; New Pocket Deisgn", tags:"Medium,Hoodie,Grey,Unisex,Cold-Tech", ex:"$89.99"},
+    {id:27, name:"Grey Hoodie (S)", quan:"213", desc:"Wool Grey Hoodie; Cold-Tech; New Pocket Deisgn", tags:"Small,Hoodie,Grey,Unisex,Cold-Tech", ex:"$89.99"},
+    {id:28, name:"Charcoal Hoodie (L)", quan:"97", desc:"Charcoal Grey Hoodie; Cold-Tech; New Pocket Deisgn", tags:"Large,Hoodie,Charcoal,Unisex,Cold-Tech", ex:"$89.99"},
+    {id:29, name:"Charcoal Hoodie (M)", quan:"143", desc:"Charcoal Grey Hoodie; Cold-Tech; New Pocket Deisgn", tags:"Medium,Hoodie,Charcoal,Unisex,Cold-Tech", ex:"$89.99"},
+    {id:30, name:"Charcoal Hoodie (S)", quan:"102", desc:"Charcoal Grey Hoodie; Cold-Tech; New Pocket Deisgn", tags:"Small,Hoodie,Charcoal,Unisex,Cold-Tech", ex:"$89.99"},
+    {id:31, name:"Maroon Hoodie (L)", quan:"154", desc:"Maroon Hoodie; Cold-Tech; New Pocket Deisgn", tags:"Large,Hoodie,Maroon,Unisex,Cold-Tech", ex:"$89.99"},
+    {id:32, name:"Maroon Hoodie (M)", quan:"123", desc:"Maroon Hoodie; Cold-Tech; New Pocket Deisgn", tags:"Medium,Hoodie,Maroon,Unisex,Cold-Tech", ex:"$89.99"},
+    {id:33, name:"Maroon Hoodie (S)", quan:"131", desc:"Maroon Hoodie; Cold-Tech; New Pocket Deisgn", tags:"Small,Hoodie,Maroon,Unisex,Cold-Tech", ex:"$89.99"}
 ];
 
 var table = new Tabulator("#table", {
     data:tableData, layout: "fitColumns",  rowClick:function(e, row){
-        var rowClicked = row.getData();
+        rowClicked = row.getData();
         console.log(row.getData());
 
-        editModal.style.display = "block";       
-        console.log(rowClicked["name"]);
+        editModal.style.display = "block";   
+        
+        console.log("Call Edit Modal: " + rowClicked["name"]);
+        
         document.getElementById("editNameInput").value = rowClicked["name"];
         document.getElementById("editQuanInput").value = rowClicked["quan"];
         document.getElementById("editDescInput").textContent = rowClicked["desc"];
@@ -53,19 +64,19 @@ var table = new Tabulator("#table", {
 });
 
 function addNew() {
-    var nameField = document.getElementById("add-name-field");
-    var quanField = document.getElementById("add-quan-field");
-    var descField = document.getElementById("add-desc-field");
-    var tagsField = document.getElementById("add-tags-field");
+    var nameField = document.getElementById("add-name-field").value;
+    var quanField = document.getElementById("add-quan-field").value;
+    var descField = document.getElementById("add-desc-field").value;
+    var tagsField = document.getElementById("add-tags-field").value;
 
     var newEntry = {id:tableData[tableData.length - 1]["id"] + 1, 
-                    name: nameField.value, 
-                    quan: quanField.value, 
-                    desc: descField.value, 
-                    tags: tagsField.value, 
+                    name: nameField, 
+                    quan: quanField, 
+                    desc: descField, 
+                    tags: tagsField, 
                     ex:"Pricing Info"};
 
-    console.log(newEntry);
+    console.log("New Entry Confirmed, exiting add modal: " + newEntry);
 
     tableData.push(newEntry);
     table.addData(newEntry);
@@ -75,13 +86,35 @@ function addNew() {
     addModal.style.display = "none";
 }
 
+function applyEdit() {
+    console.log("Edit saving... Applying edit to " + rowClicked["name"]);
+    
+    var nameField = document.getElementById("editNameInput").value;
+    var quanField = document.getElementById("editQuanInput").value;
+    var descField = document.getElementById("editDescInput").value;
+    var tagsField = document.getElementById("editTagsInput").value;
+    
+    rowClicked["name"] = nameField;
+    rowClicked["quan"] = quanField;
+    rowClicked["desc"] = descField;
+    rowClicked["tags"] = tagsField;
+    
+    console.log("Modify confirmed, exiting edit modal");
+    
+    table.updateData([{id: rowClicked["id"], 
+                       name:nameField, 
+                       quan:quanField, 
+                       desc:descField, 
+                       tags:tagsField}]);
+    
+    clearModalFields(nameField, quanField, descField, tagsField);
+    
+    editModal.style.display = "none";    
+}
+
 function clearModalFields(field1, field2, field3, field4) {
     field1.value = "";
     field2.value = "";
     field3.value = "";
     field4.value = "";
-}
-downloadButton.onclick = function() {
-    console.log("Download Clicked");
-    table.download("csv", "data.csv");
-}
+} 
