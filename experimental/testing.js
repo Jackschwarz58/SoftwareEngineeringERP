@@ -17,3 +17,24 @@ function generateDummyData() { //Temporary Method to generate Table data for "Re
     return dataElement;
 }
 //----------------------------Temporary Methods to generate Table data for "Recent Sales"----------------------------
+
+
+var chart = new frappe.Chart("#top-selling-pie-chart", { //Need to replace with SQL data once imported
+    data:{
+        labels: ["Yellow Shirt (L)","Red Hoodie (M)", "Green Shirt (S)", "Red Hoodie (L)"],
+    datasets: [
+        {
+            name: "Yellow Shirt (L)", type: "Bar",
+            values: [769]
+        },
+        {
+            name: "Green Shirt (L)", type: "Bar",
+            values: [945]
+        }
+    ]
+    },
+    type: 'bar', //'bar', 'line', 'scatter', 'pie', 'percentage'
+    height: 250,
+    /*colors: ['#92d4f9', '#367599', '#bffff4', '#ff7863', '#cc8587']*/
+    colors: ['purple', 'red']
+});

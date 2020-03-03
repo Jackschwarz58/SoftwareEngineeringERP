@@ -278,16 +278,21 @@ footer {
 }
 
 .table-button {
-    background: none;
+    background: white;
     border: none;
-    padding: none;
-    color:white;
+    padding: -10px;
+    color: #454545;
+    border-radius: 5px;
     font-size: 2vw;
     cursor:pointer;
 }
 
 .table-button:hover {
-    color:aqua;
+    background: aqua;
+}
+
+.table-button-text {
+    font-size:.75vw;
 }
 
 #banner-title {
@@ -332,3 +337,4 @@ footer {
 .sidebar-link:active {
   color: inherit;
 }
+

@@ -3,17 +3,16 @@
     <head>
         <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.5.3/dist/js/tabulator.min.js"></script>
         <script src="https://unpkg.com/frappe-charts@1.1.0/dist/frappe-charts.min.iife.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+        
         <script type="text/javascript" src="../scripts/dashboard.js" async></script>
+        <script type="text/javascript" src="../scripts/sidebar.js" async></script>
         <script type="text/javascript" src="../experimental/testing.js" async></script>
-
+        
         <link rel="stylesheet" href="../styles/reset.css">
         <link rel="stylesheet" href="../styles/styles.css">
         <link rel="stylesheet" href="../styles/dashboard.css">
         <link rel="stylesheet" href="../experimental/testing.css">
-
-
+        
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300&display=swap">
         <link rel="stylesheet" href="https://unpkg.com/tabulator-tables@4.5.3/dist/css/tabulator.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -21,7 +20,7 @@
     <body>
 
         <div class ="wrapper">    
-
+            
             <!-- ////////////////////////////Main Sidebar//////////////////////////// -->
             <div class = "sidebar">
                 <div class="site-title">
@@ -40,39 +39,42 @@
                 </div>
             </div>
             <!-- ////////////////////////////Main Sidebar End//////////////////////////// -->
-
+            
             <div class="main">
                 <div class="page-header" id="dashboard-banner">
-                    <div id="banner-title">TESTING PAGE, NOT FUNCTIONAL</div>
+                    <div id="banner-title">Dashboard</div>
                     <div class="top-actions">
+                        <button type="button" class="table-button" id="openAdd"><i class="material-icons" id="table-icon" title="Report a Sale">receipt</i></button>
+                        
+                        <button type="button" class="table-button"><i class="material-icons" id="table-icon" title="Add Inventory">note_add</i></button>
                     </div>
                 </div>
                 <div class="dashboard-inner">
                     <div class="module" id="top-module"><span class="module-title" id="top-module-title">Weekly Sales Over Time</span><br><div id="line-graph"></div></div>
+                    
                     <div class="module" id="left-module"><span class="module-title" id="left-module-title">Recent Sales</span>
                         <div class="scrollable" id="sold-items-scrollable">
                             <table class="item-table" id="sold-items-table">
                                 <tbody>
-                                <tr><td>34</td><td>Yellow Shirt (L)</td></tr>
-                                <tr><td>12</td><td>Red Hoodie (M)</td></tr>
-                                <tr><td>21</td><td>Denim Jacket (M)</td></tr>
-                                <tr><td>98</td><td>Blue Shirt (L)</td></tr>
-                                <tr><td>41</td><td>Green Shirt (L)</td></tr>
-                                <tr><td>27</td><td>Blue Hoodie (S)</td></tr>
-                                <tr><td>31</td><td>Denim Jacket (S)</td></tr>
-                                <tr><td>67</td><td>Yellow Shirt (M)</td></tr>
+                                    <tr><td>34</td><td>Yellow Shirt (L)</td></tr>
+                                    <tr><td>12</td><td>Red Hoodie (M)</td></tr>
+                                    <tr><td>21</td><td>Denim Jacket (M)</td></tr>
+                                    <tr><td>98</td><td>Blue Shirt (L)</td></tr>
+                                    <tr><td>41</td><td>Green Shirt (L)</td></tr>
+                                    <tr><td>27</td><td>Blue Hoodie (S)</td></tr>
+                                    <tr><td>31</td><td>Denim Jacket (S)</td></tr>
+                                    <tr><td>67</td><td>Yellow Shirt (M)</td></tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
-
-                    <div class="module" id="right-module">Right</div>
-                    <div class="module" id="bottom-module">Bottom</div>
+                    
+                    <div class="module" id="right-module"><span class="module-title" id="right-module-title">Top Selling Inventory</span><br><div id="top-selling-pie-chart"></div></div>
+                    <div class="module" id="bottom-module"></div>
                 </div>
             </div>
         </div>
-
+        
         <footer>
             &copy; SE ERP Project | CS4273 | 2020
         </footer>
