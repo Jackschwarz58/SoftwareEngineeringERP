@@ -39,29 +39,31 @@ var tableData = [
     {id:33, name:"Maroon Hoodie (S)", quan:"131", desc:"Maroon Hoodie; Cold-Tech; New Pocket Deisgn", tags:"Small,Hoodie,Maroon,Unisex,Cold-Tech", ex:"$89.99"}
 ];
 
-var table = new Tabulator("#table", {
-    data:tableData, layout: "fitColumns",  rowClick:function(e, row){
-        rowClicked = row.getData();
-        console.log(row.getData());
+function createTable() {
+    var table = new Tabulator("#table", {
+        data:tableData, layout: "fitColumns",  rowClick:function(e, row){
+            rowClicked = row.getData();
+            console.log(row.getData());
 
-        editModal.style.display = "block";   
-        
-        console.log("Call Edit Modal: " + rowClicked["name"]);
-        
-        document.getElementById("editNameInput").value = rowClicked["name"];
-        document.getElementById("editQuanInput").value = rowClicked["quan"];
-        document.getElementById("editDescInput").textContent = rowClicked["desc"];
-        document.getElementById("editTagsInput").value = rowClicked["tags"];        
-    },
-    columns:[
-        {title:"ID",field:"id", width:50, resizable:false},
-        {title:"Name",field:"name", width: 150},
-        {title:"Quantity", field:"quan", width:100},
-        {title:"Description",field:"desc"},
-        {title:"Tags",field:"tags", width:180},
-        {title:"Pricing (USD)",field:"ex", width:200},
-    ],
-});
+            editModal.style.display = "block";   
+
+            console.log("Call Edit Modal: " + rowClicked["name"]);
+
+            document.getElementById("editNameInput").value = rowClicked["name"];
+            document.getElementById("editQuanInput").value = rowClicked["quan"];
+            document.getElementById("editDescInput").textContent = rowClicked["desc"];
+            document.getElementById("editTagsInput").value = rowClicked["tags"];        
+        },
+        columns:[
+            {title:"ID",field:"id", width:50, resizable:false},
+            {title:"Name",field:"name", width: 150},
+            {title:"Quantity", field:"quan", width:100},
+            {title:"Description",field:"desc"},
+            {title:"Tags",field:"tags", width:180},
+            {title:"Pricing (USD)",field:"ex", width:200},
+        ],
+    });
+}
 
 function addNew() {
     var nameField = document.getElementById("add-name-field").value;
@@ -88,29 +90,30 @@ function addNew() {
 
 function applyEdit() {
     console.log("Edit saving... Applying edit to " + rowClicked["name"]);
-    
+
     var nameField = document.getElementById("editNameInput").value;
     var quanField = document.getElementById("editQuanInput").value;
     var descField = document.getElementById("editDescInput").value;
     var tagsField = document.getElementById("editTagsInput").value;
-    
+
     rowClicked["name"] = nameField;
     rowClicked["quan"] = quanField;
     rowClicked["desc"] = descField;
     rowClicked["tags"] = tagsField;
-    
+
     console.log("Modify confirmed, exiting edit modal");
-    
+
     table.updateData([{id: rowClicked["id"], 
                        name:nameField, 
                        quan:quanField, 
                        desc:descField, 
                        tags:tagsField}]);
-    
+
     clearModalFields(nameField, quanField, descField, tagsField);
-    
+
     editModal.style.display = "none";    
 }
+
 
 function clearModalFields(field1, field2, field3, field4) {
     field1.value = "";
