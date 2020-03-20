@@ -2,9 +2,11 @@ var editModal = document.getElementById("editModal");
 var addModal = document.getElementById("addModal");
 var rowClicked = "";
 
+
+
 //Dummy Table Data
-var tableData = [
-    {id:1, name:"Yellow Shirt (L)", quan:"1003", desc:"Yellow 100% Cotton Blend T-Shirt", tags:"Large, Shirt, Yellow", ex:"$29.99"},
+var tableData = [];
+ /*   {id:1, name:"Yellow Shirt (L)", quan:"1003", desc:"Yellow 100% Cotton Blend T-Shirt", tags:"Large, Shirt, Yellow", ex:"$29.99"},
     {id:2, name:"Yellow Shirt (M)", quan:"974", desc:"Yellow 100% Cotton Blend T-Shirt", tags:"Medium, Shirt, Yellow", ex:"$29.99"},
     {id:3, name:"Yellow Shirt (S)", quan:"1243", desc:"Yellow 100% Cotton Blend T-Shirt", tags:"Small, Shirt, Yellow", ex:"$29.99"},
     {id:4, name:"Blue Shirt (L)", quan:"1043", desc:"Blue 100% Cotton Blend T-Shirt", tags:"Large, Shirt, Blue", ex:"$29.99"},
@@ -37,11 +39,17 @@ var tableData = [
     {id:31, name:"Maroon Hoodie (L)", quan:"154", desc:"Maroon Hoodie; Cold-Tech; New Pocket Deisgn", tags:"Large,Hoodie,Maroon,Unisex,Cold-Tech", ex:"$89.99"},
     {id:32, name:"Maroon Hoodie (M)", quan:"123", desc:"Maroon Hoodie; Cold-Tech; New Pocket Deisgn", tags:"Medium,Hoodie,Maroon,Unisex,Cold-Tech", ex:"$89.99"},
     {id:33, name:"Maroon Hoodie (S)", quan:"131", desc:"Maroon Hoodie; Cold-Tech; New Pocket Deisgn", tags:"Small,Hoodie,Maroon,Unisex,Cold-Tech", ex:"$89.99"}
-];
+];*/
 
-function createTable() {
-    var table = new Tabulator("#table", {
-        data:tableData, layout: "fitColumns",  rowClick:function(e, row){
+
+// At the start of the application get the information stored in the database
+updateTableFromDB();
+
+var table;
+function createTable(inputData) {
+	
+    table = new Tabulator("#table", {
+        data:inputData, layout: "fitColumns",  rowClick:function(e, row){
             rowClicked = row.getData();
             console.log(row.getData());
 
@@ -52,15 +60,21 @@ function createTable() {
             document.getElementById("editNameInput").value = rowClicked["name"];
             document.getElementById("editQuanInput").value = rowClicked["quan"];
             document.getElementById("editDescInput").textContent = rowClicked["desc"];
-            document.getElementById("editTagsInput").value = rowClicked["tags"];        
+            document.getElementById("editTagsInput").value = rowClicked["tags"];
+
+			
         },
         columns:[
             {title:"ID",field:"id", width:50, resizable:false},
             {title:"Name",field:"name", width: 150},
             {title:"Quantity", field:"quan", width:100},
             {title:"Description",field:"desc"},
-            {title:"Tags",field:"tags", width:180},
-            {title:"Pricing (USD)",field:"ex", width:200},
+			{title:"Sold",field:"sold", width:100},
+			{title:"Total",field:"total", width:100},
+            {title:"Date Added",field:"dateadd", width:200},
+			{title:"Date Modified",field:"datemod", width:200},
+            {title:"Tags",field:"tags",},
+            
         ],
     });
 }
@@ -71,21 +85,30 @@ function addNew() {
     var descField = document.getElementById("add-desc-field").value;
     var tagsField = document.getElementById("add-tags-field").value;
 
-    var newEntry = {id:tableData[tableData.length - 1]["id"] + 1, 
-                    name: nameField, 
+    var newEntry = {name: nameField, 
                     quan: quanField, 
                     desc: descField, 
-                    tags: tagsField, 
-                    ex:"Pricing Info"};
+                    tags: tagsField,
+					sold: 0,
+					total: 0 
+                    };
 
     console.log("New Entry Confirmed, exiting add modal: " + newEntry);
+	
+	updateDBEntry(newEntry);
 
-    tableData.push(newEntry);
-    table.addData(newEntry);
+    addToTable(newEntry);
 
     clearModalFields(nameField, quanField, descField, tagsField);
 
     addModal.style.display = "none";
+	
+	updateTableFromDB();
+}
+
+function addToTable(entry) {
+    tableData.push(entry);
+    table.addData(entry);
 }
 
 function applyEdit() {
@@ -100,20 +123,83 @@ function applyEdit() {
     rowClicked["quan"] = quanField;
     rowClicked["desc"] = descField;
     rowClicked["tags"] = tagsField;
+	
+	var entry = {
+					id: rowClicked["id"], 
+                    name: nameField, 
+                    quan: quanField, 
+                    desc: descField, 
+                    tags: tagsField,
+					sold: 0,
+					total: 0
+				};
 
     console.log("Modify confirmed, exiting edit modal");
 
-    table.updateData([{id: rowClicked["id"], 
-                       name:nameField, 
-                       quan:quanField, 
-                       desc:descField, 
-                       tags:tagsField}]);
+	updateDBEntry(entry);
+
+    table.updateData([entry]);
 
     clearModalFields(nameField, quanField, descField, tagsField);
 
     editModal.style.display = "none";    
 }
 
+function updateTableFromDB() {
+    tableData = [];
+    var xmlhttp = new XMLHttpRequest();
+    var url = "http://localhost/scripts/gettable.php";
+
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+			var json = JSON.parse(this.responseText);
+            createTable(json);
+        }
+    }
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+}
+
+function updateDBEntry(entry) 
+{
+	let updateId = entry.id;
+	let name = entry.name;
+	let quan = entry.quan;
+	let details = entry.desc;
+	let sold = entry.sold;
+	let tags = entry.tags;
+	let total = entry.total;
+	
+	name = name.replace(/ /, "%20");
+	details = details.replace(/ /, "%20");
+	tags = tags.replace(/ /, "%20");
+	
+	console.log("Updating ID " + updateId + " named " + name);
+	var xmlhttp = new XMLHttpRequest();
+	
+	if(updateId === undefined)
+		updateId = 0;
+	
+    var url = "http://localhost/scripts/additem.php"
+	url += "?id=" + updateId; 
+	url += "&q=" + quan;
+	url += "&n=" + name;
+	url += "&d=" + details;
+	url += "&s=" + sold;
+	url += "&t=" + tags;
+	url += "&tot=" + total;
+	
+	console.log(url);
+	
+
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+			console.log("Updated/Added item");
+        }
+    }
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+}
 
 function clearModalFields(field1, field2, field3, field4) {
     field1.value = "";
