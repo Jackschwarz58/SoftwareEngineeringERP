@@ -1,0 +1,78 @@
+.dashboard-inner {
+    display:grid;
+    grid-template-areas: 
+        "top top top top"
+        "left right right right"
+        "btm btm btm btm";
+    grid-gap: 10px;
+    padding: 15px;
+}
+
+.module {
+    padding: 10px;
+}
+
+.module-title {
+    font-size: 24px;
+}
+
+#top-module {
+    grid-area: top;
+    width:inherit;
+}
+
+#left-module {
+    grid-area: left;
+    width: 250px;
+    display: inline-block;
+}
+
+#right-module {
+    grid-area: right;
+}
+
+#bottom-module { 
+    grid-area: btm;
+}
+
+.scrollable {
+    margin: 10px;
+    height: 220px;
+    width:100%;
+    text-align: justify;
+    overflow:hidden;
+    text-overflow: hidden;
+    content: "";
+    position:relative;
+    padding-top: 8px;
+}
+
+.scrollable:before {
+    content:'';
+    width: 100%;
+    height: 100%;    
+    position:absolute;
+    left:0;
+    top:0;
+    background:linear-gradient(transparent 120px, #F4F4F5);
+}
+
+#sold-items-table {
+    border-collapse: collapse;
+    overflow: hidden;
+    width:100%;
+}
+
+#sold-items-table th, td {
+  padding: 5px;
+  text-align: left;
+  border-bottom: .7px solid #dadada;
+}
+
+#sold-items-table td:first-child {
+    padding-left: 0;
+}
+
+#sold-items-table td:last-child {
+    padding-right: 0;
+}
