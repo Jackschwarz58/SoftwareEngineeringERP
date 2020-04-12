@@ -3,6 +3,7 @@ var btn = document.getElementById("openAdd");
 var span = document.getElementsByClassName("close")[0];
 var closeAddButtons = document.getElementById("cancelAdd");
 
+
 var editModal = document.getElementById("editModal");
 var closeEdit = document.getElementsByClassName("close-edit")[0];
 var closeEditButtons = document.getElementById("cancel-edit");
@@ -25,4 +26,4 @@ span.onclick = function() {
 
 closeAddButtons.onclick = function() {
     modal.style.display = "none";
-}
+} 

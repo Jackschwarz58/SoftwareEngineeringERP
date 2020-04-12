@@ -74,7 +74,7 @@ footer {
 
 .inner {
     padding:15px;
-    width: 97.5%;
+    width: 97%;
 }
 
 .page-header {
@@ -93,11 +93,12 @@ footer {
     height: 100%;
 }
 
- /* The Modal (background) */
+/* Modal Related Styling (Begin) */
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -107,13 +108,18 @@ footer {
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-/* Modal Content/Box */
 .modal-content {
+  position: relative;
   background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: auto;
   padding: 20px 20px 20px 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
 }
 
 .modal-footer {
@@ -123,7 +129,6 @@ footer {
   height:25px;
 }
 
-/* The Close Button */
 .close, .close-edit {
   color: #aaa;
   float: right;
@@ -139,6 +144,33 @@ footer {
   text-decoration: none;
   cursor: pointer;
 } 
+
+/* Button to Trigger Modal */
+.modal-button {
+    font-size: 16px;
+    font-family: 'Lato', sans-serif;
+    padding: 10px 15px;
+    text-align: center;
+    display: inline-block;
+    background-color: #ddd;
+    border:none;
+    text-decoration: none;
+    opacity:100%;
+    margin: 4px 2px;
+}
+
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+
+/* Modal Related Styling (End) */
 
 .form-inline {
   display: flex;
@@ -189,13 +221,12 @@ footer {
 }
 
 .input-field-number {
-    width: 25%;
     padding: 12px 20px;
     margin: 8px 0px;
     box-sizing:border-box;
     font-size: 18px; /*20px*/
-    max-width: 50%;
 }
+
 .input-field-number[type=number]:focus {
     outline:none;
     border: 3px solid #999;
@@ -215,6 +246,36 @@ footer {
     padding: 5px 5px 5px 0px;
 }
 
+.modal-num-fields {
+    width:100%;
+    padding-bottom: 10px;
+    height: 100%;
+    display:block;
+}
+
+#quantity-input {
+    display: block;
+    float:left;
+    width:40%;
+    padding-bottom: 10px;
+}
+
+#price-input {
+    display: block;
+    float:right;
+    width:60%;
+    padding-bottom: 10px;
+}
+
+.description-field {
+    height:auto;
+}
+
+
+
+
+
+
 .input-field-large {
     width:100%;
     padding: 12px 20px;
@@ -232,19 +293,6 @@ footer {
 .input-field-large[type=text]:focus {
     outline:none;
     border: 3px solid #999;
-}
-
-.modal-button {
-    font-size: 16px;
-    font-family: 'Lato', sans-serif;
-    padding: 10px 15px;
-    text-align: center;
-    display: inline-block;
-    background-color: #ddd;
-    border:none;
-    text-decoration: none;
-    opacity:100%;
-    margin: 4px 2px;
 }
 
 .site-title {
@@ -288,21 +336,52 @@ footer {
 }
 
 .table-button:hover {
-    background: aqua;
+    background: #808080;
 }
 
 .table-button-text {
     font-size:.75vw;
 }
 
+
 #banner-title {
     width: 80%;
+}
+
+.banner-left {
+    width: 20%;
+}
+
+.banner-center {
+    width:60%;
+    text-align: center;
+    align-content: center;
+    display:flex;
+    justify-content: center;
+}
+
+.top-filter-button {
+    color:white;
+    background: #4f4f4f;
+    border:none;
+    font-size: 20px;
+    cursor:pointer;
+    width:5%;
+    margin-right:10px;
+}
+
+.top-filter-button:hover {
+    background:#808080;
 }
 
 .top-actions {
     width: 20%;
     text-align: right;
     position:static;
+}
+
+#clear-filter-button {
+    width: 10%;
 }
 
 .tabulator-tableHolder {
@@ -316,6 +395,7 @@ footer {
     font-size: 1vw;
     font-family: 'Lato', sans-serif;
 }
+
 #download-button:hover {
     color:aqua;
     cursor:pointer;
@@ -338,3 +418,43 @@ footer {
   color: inherit;
 }
 
+.table-filter {
+    padding:6px;
+    border:none;
+    float:left;
+    font-size:22px;
+    background:#4f4f4f;
+    color:white;
+    margin-right:10px;
+}
+
+.table-filter:focus {
+    background:#808080;
+}
+
+#table-field-list {
+    border-radius: 0;
+    width:15%;
+}
+
+#type-field-list {
+    width:20%;
+    height: 100%;
+    border-radius: 0;
+}
+
+select:not([multiple]) {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-position: right 50%;
+    background-repeat: no-repeat;
+    background-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1"><path d="M4 8L0 4h8z"/></svg>');
+}
+
+.table-dropdown {
+    border-right: 1px white;
+}
+
+#filter-field {
+    width: 40%;
+}

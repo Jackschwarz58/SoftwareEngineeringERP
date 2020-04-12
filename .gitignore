@@ -1,0 +1,7 @@
+.DS_Store
+package_lock.json
+index.html
+package.json
+scripts/package-lock.json
+scripts/package.json
+scripts/autocomplete.js

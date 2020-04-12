@@ -2,7 +2,11 @@ var editModal = document.getElementById("editModal");
 var addModal = document.getElementById("addModal");
 var rowClicked = "";
 
+var setFilterButton = document.getElementById("search-filter-button");
+var clearFilterButton = document.getElementById("clear-filter-button");
+
 //Dummy Table Data
+
 var tableData = [
     {id:1, name:"Yellow Shirt (L)", quan:"1003", desc:"Yellow 100% Cotton Blend T-Shirt", tags:"Large, Shirt, Yellow", ex:"$29.99"},
     {id:2, name:"Yellow Shirt (M)", quan:"974", desc:"Yellow 100% Cotton Blend T-Shirt", tags:"Medium, Shirt, Yellow", ex:"$29.99"},
@@ -38,7 +42,6 @@ var tableData = [
     {id:32, name:"Maroon Hoodie (M)", quan:"123", desc:"Maroon Hoodie; Cold-Tech; New Pocket Deisgn", tags:"Medium,Hoodie,Maroon,Unisex,Cold-Tech", ex:"$89.99"},
     {id:33, name:"Maroon Hoodie (S)", quan:"131", desc:"Maroon Hoodie; Cold-Tech; New Pocket Deisgn", tags:"Small,Hoodie,Maroon,Unisex,Cold-Tech", ex:"$89.99"}
 ];
-
 var table = new Tabulator("#table", {
     data:tableData, layout: "fitColumns",  rowClick:function(e, row){
         rowClicked = row.getData();
@@ -51,7 +54,7 @@ var table = new Tabulator("#table", {
         document.getElementById("editNameInput").value = rowClicked["name"];
         document.getElementById("editQuanInput").value = rowClicked["quan"];
         document.getElementById("editDescInput").textContent = rowClicked["desc"];
-        document.getElementById("editTagsInput").value = rowClicked["tags"];        
+        document.getElementById("editTagsInput").value = rowClicked["tags"];   
     },
     columns:[
         {title:"ID",field:"id", width:50, resizable:false},
@@ -66,6 +69,7 @@ var table = new Tabulator("#table", {
 function addNew() {
     var nameField = document.getElementById("add-name-field").value;
     var quanField = document.getElementById("add-quan-field").value;
+    var priceField = document.getElementById("add-price-field").value;
     var descField = document.getElementById("add-desc-field").value;
     var tagsField = document.getElementById("add-tags-field").value;
 
@@ -74,14 +78,14 @@ function addNew() {
                     quan: quanField, 
                     desc: descField, 
                     tags: tagsField, 
-                    ex:"Pricing Info"};
+                    ex: priceField};
 
     console.log("New Entry Confirmed, exiting add modal: " + newEntry);
 
     tableData.push(newEntry);
     table.addData(newEntry);
 
-    clearModalFields(nameField, quanField, descField, tagsField);
+    clearModalFields(nameField, quanField, priceField, descField, tagsField);
 
     addModal.style.display = "none";
 }
@@ -91,11 +95,13 @@ function applyEdit() {
     
     var nameField = document.getElementById("editNameInput").value;
     var quanField = document.getElementById("editQuanInput").value;
+    var priceField = document.getElementById("editPriceInput").value;
     var descField = document.getElementById("editDescInput").value;
     var tagsField = document.getElementById("editTagsInput").value;
     
     rowClicked["name"] = nameField;
     rowClicked["quan"] = quanField;
+    rowClicked["ex"] = priceField;
     rowClicked["desc"] = descField;
     rowClicked["tags"] = tagsField;
     
@@ -105,16 +111,33 @@ function applyEdit() {
                        name:nameField, 
                        quan:quanField, 
                        desc:descField, 
-                       tags:tagsField}]);
+                       tags:tagsField,
+                       ex:priceField}]);
     
-    clearModalFields(nameField, quanField, descField, tagsField);
+    clearModalFields(nameField, quanField, priceField, descField, tagsField);
     
     editModal.style.display = "none";    
 }
 
-function clearModalFields(field1, field2, field3, field4) {
+function clearModalFields(field1, field2, field3, field4, field5) {
     field1.value = "";
     field2.value = "";
     field3.value = "";
     field4.value = "";
+    field5.value = "";
 } 
+
+setFilterButton.onclick = function() {
+    var searchTxt = document.getElementById("filter-field").value;
+    var categorySelection = document.getElementById("table-field-list").value;
+    var typeSelection = document.getElementById("type-field-list").value;
+    
+    table.setFilter(categorySelection, typeSelection, searchTxt);
+}
+
+clearFilterButton.onclick = function() {
+    document.getElementById("filter-field").value ="";
+    
+    table.clearFilter();
+}
+
