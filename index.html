@@ -1,108 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.5.3/dist/js/tabulator.min.js"></script>
-        <script type="text/javascript" src="scripts/script.js" async></script>
-        <script type="text/javascript" src="scripts/tabs.js" async></script>
-        <script type="text/javascript" src="scripts/main.js" async></script>
-        <link rel="stylesheet" href="styles/reset.css">
-        <link rel="stylesheet" href="styles/styles.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300&display=swap">
-        <link rel="stylesheet" href="https://unpkg.com/tabulator-tables@4.5.3/dist/css/tabulator.min.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    </head>
-    <body>
-
-        <!-- ////////////////////Modals Hidden for Later Activation//////////////////// -->
-        <div id="addModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <p class="modal-headline">Add New Item...</p>            
-                <form id="addNewForm">
-                    <span class="modal-subheading">Name:</span><br>
-                    <input placeholder="Name..." class="input-field" id="add-name-field" type="text" name="name"><br>
-
-                    <span class="modal-subheading quantity-box">Quantity:</span><br>
-                    <input placeholder="10" class="input-field-number" id="add-quan-field" type="number" min="0"><br>
-
-                    <span class="modal-subheading">Description: </span><br>
-                    <textarea placeholder="Item Description..." class="input-field-large" id="add-desc-field" type="text" name="desc" rows="4" cols="50"></textarea> <br>
-
-                    <span class="modal-subheading">Tags: </span><br>
-                    <input placeholder="Tag 1,Tag 2,..."class="input-field" id="add-tags-field" type="text" name="tags"><br>
-                </form>
-
-                <div class="modal-footer">
-                    <button class="modal-button close" id="confirmAdd" onclick="addNew()">Add</button>
-                    <button class="modal-button close" id="cancelAdd">Cancel</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="editModal" class="modal">
-            <div class="modal-content">
-                <span class="close-edit">&times;</span>
-                <p class="modal-headline">Editing...</p>            
-                <form id="editForm">
-                    <span class="modal-subheading" id="editName">Name:</span><br>
-                    <input id="editNameInput" placeholder="Name..." class="input-field" type="text" name="name"><br>
-
-                    <span class="modal-subheading quantity-box" id="editQuan">Quantity:</span><br>
-                    <input id="editQuanInput" placeholder="10" class="input-field-number" type="number" min="0"><br>
-
-                    <span class="modal-subheading" id="editDesc">Description:</span><br>
-                    <textarea id="editDescInput" placeholder="Item Description..." class="input-field-large" type="text" name="desc" rows="4" cols="50"></textarea> <br>
-
-                    <span class="modal-subheading" id="editTags">Tags:</span><br>
-                    <input id="editTagsInput" placeholder="Tag 1,Tag 2,..."class="input-field" type="text" name="tags"><br>
-                </form>
-
-                <div class="modal-footer">
-                    <button class="modal-button close" id="confirm-edit">Apply</button>
-                    <button class="modal-button close" id="cancel-edit">Cancel</button>
-                </div>
-            </div>
-        </div>
-        <!-- ////////////////////End of Modal Section//////////////////// -->
-
-        <div class ="wrapper">    
-            
-            <!-- ////////////////////////////Main Sidebar//////////////////////////// -->
-            <div class = "sidebar">
-                <div class="site-title">
-                    <span style="color:aqua">ERP</span>Project
-                </div>
-                <nav>
-                    <div class="nav-link" id="activities"><i class="material-icons" id="sidebar-icon">dashboard</i>Dashboard</div>
-                    <div class="nav-link" id="transactions"><i class="material-icons" id="sidebar-icon">list_alt</i>Inventory</div>
-                    <div class="nav-link" id="lists"><i class="material-icons" id="sidebar-icon">check</i>Lists</div>
-                    <div class="nav-link" id="reports"><i class="material-icons" id="sidebar-icon">pie_chart</i>Reports</div>
-                    <div class="nav-link" id="analytics"><i class="material-icons" id="sidebar-icon">insert_chart</i>Analytics</div>
-                    <div class="nav-link" id="documents"><i class="material-icons" id="sidebar-icon">insert_drive_file</i>Documents</div>
-                </nav>
-                <div class="sidebar-bottom">
-                    <button type="button" id="download-button"><i class="material-icons" id="sidebar-cloud-icon">cloud_download</i> <span>Download CSV</span></button>
-                </div>
-            </div>
-            <!-- ////////////////////////////Main Sidebar End//////////////////////////// -->
-            
-            <div class="main">
-                <div class="page-header" id="dashboard-banner">
-                    <div id="banner-title">Inventory</div>
-                    <div class="table-actions">
-                        <button type="button" class="table-button" id="openAdd"><i class="material-icons" id="table-icon">add</i></button>
-                        <button type="button" class="table-button"><i class="material-icons" id="table-icon">delete</i></button>
-                    </div>
-                </div>
-                
-                <div class="inner">
-                    <div id="table"></div>
-                </div>
-            </div>
-        </div>
-        
-        <footer>
-            &copy; SE ERP Project | CS4273 | 2020
-        </footer>
-    </body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1671.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 14.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 12.0px 0.0px; line-height: 14.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 14.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000; min-height: 12.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 13.0px; font: 11.0px '.SF NS Text'; color: #000000; color: rgba(0, 0, 0, 0.85); -webkit-text-stroke: rgba(0, 0, 0, 0.85)}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 13.0px; font: 11.0px 'Helvetica Neue'; color: #000000; color: rgba(0, 0, 0, 0.85); -webkit-text-stroke: rgba(0, 0, 0, 0.85)}
+    span.s1 {font-kerning: none}
+    span.s2 {font-kerning: none; background-color: #b3b3b3}
+    span.s3 {font: 12.0px Times; font-kerning: none; color: #000000; -webkit-text-stroke: 0px #000000}
+    span.s4 {font-kerning: none; color: #21ffff; -webkit-text-stroke: 0px #21ffff}
+    span.s5 {font: 11.0px '.SF NS Text'; font-kerning: none; background-color: #b3b3b3}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">×</span></p>
+<p class="p2"><span class="s1">Add New Item...</span></p>
+<p class="p1"><span class="s1">Name:</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">Quantity:</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">Description:<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">Tags:<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s2">Add</span><span class="s3"> </span><span class="s2">Cancel</span><span class="s3"><span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1">×</span></p>
+<p class="p2"><span class="s1">Editing...</span></p>
+<p class="p1"><span class="s1">Name:</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">Quantity:</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">Description:</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">Tags:</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s2">Apply</span><span class="s3"> </span><span class="s2">Cancel</span><span class="s3"><span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s4">ERP</span><span class="s1">Project<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><i>dashboard</i>Dashboard</span></p>
+<p class="p1"><span class="s1"><i>list_alt</i>Inventory</span></p>
+<p class="p1"><span class="s1"><i>check</i>Lists</span></p>
+<p class="p1"><span class="s1"><i>pie_chart</i>Reports</span></p>
+<p class="p1"><span class="s1"><i>insert_chart</i>Analytics</span></p>
+<p class="p1"><span class="s1"><i>insert_drive_file</i>Documents</span></p>
+<p class="p5"><span class="s2">cloud_download</span><span class="s5"> Download CSV</span><span class="s3"><span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1">Inventory</span></p>
+<p class="p5"><span class="s2">add</span><span class="s3"> </span><span class="s2">delete</span><span class="s3"><span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">© SE ERP Project | CS4273 | 2020<span class="Apple-converted-space"> </span></span></p>
+</body>
 </html>

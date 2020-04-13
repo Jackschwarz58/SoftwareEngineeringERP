@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <title>ERP Project</title>
         <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.5.3/dist/js/tabulator.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
         <script type="text/javascript" src="../scripts/script.js" async></script>
         <script type="text/javascript" src="../scripts/tabs.js" async></script>
@@ -9,60 +11,55 @@
 
         <link rel="stylesheet" href="../styles/reset.css">
         <link rel="stylesheet" href="../styles/styles.css">
+        <link rel="stylesheet" href="../styles/modalTEST.css">
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300&display=swap">
         <link rel="stylesheet" href="https://unpkg.com/tabulator-tables@4.5.3/dist/css/tabulator.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     </head>
     <body>
-
         <!-- ////////////////////Modals Hidden for Later Activation//////////////////// -->
         <div id="addModal" class="modal">
             <div class="modal-content">
-                
                 <span class="close">&times;</span>
-                <p class="modal-headline">Add New Item...</p>
                 
+                <div id="modal-header">
+                    New Item...
+                </div>
                 
-                <form id="addNewForm">
-                    <span class="modal-subheading">Name:</span><br>
-                    <input placeholder="Name..." class="input-field" id="add-name-field" type="text" name="name"><br>
-
-                    <div class="modal-num-fields">
-                        <div id="quantity-input">
-                            <span class="modal-subheading quantity-box">Quantity:</span><br>
-                            <input placeholder="10" class="input-field-number" id="add-quan-field" type="number" min="0">
-                        </div>
-                        <div id="price-input">
-                            <span class="modal-subheading">Price:</span><br>
-                            <span style="font-size:20px">$</span><input id="add-price-field" placeholder="(USD)" class="input-field-number" type="number" min="0">
-                            <br>
-                        </div>
+                <div class="modal-input-content" id="name-input-content">
+                    <span class="modal-subheading" id="name-subheading">Name:<span class="required-tag">* </span></span>
+                    <input placeholder="Name..." class="input-field" id="add-name-field" type="text" name="name">
+                </div>
+                
+                <div class="modal-input-content" id="nums-content">
+                    <div id="quan-input-section">
+                        <span class="modal-subheading" id="quan-subheading">Quantity:<span class="required-tag">* </span></span>
+                        <input placeholder="10" class="input-field-number" id="add-quan-field" type="number" min="1">
                     </div>
-
-
-                    <div class="description-field">
-                        <span class="modal-subheading" id="description-heading">Description:</span><br>
-                        <textarea placeholder="Item Description..." class="input-field-large" id="add-desc-field" type="text" name="desc" rows="4" cols="50"></textarea> <br>
+                    
+                    <div id="price-input-section">
+                        <span class="modal-subheading" id="price-subheading">Price <span class="price-qualifier">(USD)</span>:</span>
+                        <input id="add-price-field" placeholder="19.99" class="input-field-number" type="number" min="0">
                     </div>
-
-                    
-                    
-                    
-                    <span class="modal-subheading">Tags: </span><br>
-                    <input placeholder="Tag 1,Tag 2,..."class="input-field" id="add-tags-field" type="text" name="tags"><br>
-                </form>
+                </div>
                 
+                <div class="modal-input-content" id="desc-input-content">
+                    <span class="modal-subheading" id="description-subheading">Description: </span>
+                    <textarea placeholder="Item Description..." class="input-field-large" id="add-desc-field" type="text" name="desc" rows="3" cols="50"></textarea>
+                </div>
                 
+                <div class="modal-input-content" id="tags-input-content">
+                    <div id ="tags-top-row"><span class="modal-subheading" id="tags-subheading">Tags: </span>
+                        <button type="button" class="more-button" id="more-tags-button">Add</button>
+                        </div>
+                    <div id="tag-field-container">
+                        <input placeholder="Tag" class="input-field add-tags-field" type="text" name="tags" size="10"></div>
+                </div>
                 
-                
-                
-                
-                
-
-                <div class="modal-footer">
-                    <button class="modal-button close" id="confirmAdd" onclick="addNew()">Add</button>
-                    <button class="modal-button close" id="cancelAdd">Cancel</button>
+                <div class="modal-confirm-buttons">
+                    <button class="modal-footer-button" id="confirmAdd" onclick="addNew()">Add</button>
+                    <button class="modal-footer-button" id="cancelAdd">Cancel</button>
                 </div>
                 
             </div>
@@ -71,21 +68,81 @@
         <div id="editModal" class="modal">
             <div class="modal-content">
                 <span class="close-edit">&times;</span>
+                
+                <div id="modal-header">
+                    Edit Item...
+                </div>
+
+                <div class="modal-input-content" id="name-input-content">
+                    <span class="modal-subheading" id="name-subheading">Name: </span>
+                    <input placeholder="Name..." class="input-field" id="editNameInput" type="text" name="name">
+                </div>
+
+                <div class="modal-input-content" id="nums-content">
+                    <div id="quan-input-section">
+                        <span class="modal-subheading" id="quan-subheading">Quantity: </span>
+                        <input placeholder="10" class="input-field-number" id="editQuanInput" type="number" min="1">
+                    </div>
+                    
+                    <div id="price-input-section">
+                        <span class="modal-subheading" id="price-subheading">Price <span class="price-qualifier">(USD)</span>:</span>
+                        <input id="editPriceInput" placeholder="19.99" class="input-field-number" type="number" min="0">
+                    </div>
+                </div>
+                
+                <div class="modal-input-content" id="desc-input-content">
+                    <span class="modal-subheading" id="description-subheading">Description: </span>
+                    <textarea placeholder="Item Description..." class="input-field-large" id="editDescInput" type="text" name="desc" rows="3" cols="50"></textarea>
+                </div>
+                
+                <div class="modal-input-content" id="tags-input-content">
+                    <div id ="tags-top-row"><span class="modal-subheading" id="tags-subheading">Tags: </span>
+                        <button type="button" class="more-button" id="more-tags-button-edit">Add</button>
+                        </div>
+                    <div id="tag-field-container">
+                        <input placeholder="Tag" class="input-field" id="editTagsInput" type="text" name="tags" size="10"></div>
+                </div>
+                
+                <div class="modal-confirm-buttons">
+                    <button class="modal-footer-button" id="confirm-edit" onclick="applyEdit()">Apply</button>
+                    <button class="modal-footer-button" id="cancel-edit">Cancel</button>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        <!--
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <span class="close-edit">&times;</span>
                 <p class="modal-headline">Editing...</p>            
                 <form id="editForm">
+                    
                     <span class="modal-subheading" id="editName">Name:</span><br>
                     <input id="editNameInput" placeholder="Name..." class="input-field" type="text" name="name"><br>
 
+                    
+                    
                     <span class="modal-subheading quantity-box" id="editQuan">Quantity:</span><br>
                     <input id="editQuanInput" placeholder="10" class="input-field-number" type="number" min="0">
 
+                    
+                    
                     <span class="modal-subheading price-box" id="editPrice">Price:</span><br>
                     $<input id="editPriceInput" placeholder="9.99" class="input-field-number" type="number" min="0">
                     <br>
 
+                    
+                    
                     <span class="modal-subheading" id="editDesc">Description:</span><br>
                     <textarea id="editDescInput" placeholder="Item Description..." class="input-field-large" type="text" name="desc" rows="4" cols="50"></textarea> <br>
 
+                    
+                    
                     <span class="modal-subheading" id="editTags">Tags:</span><br>
                     <input id="editTagsInput" placeholder="Tag 1,Tag 2,..."class="input-field" type="text" name="tags"><br>
                 </form>
@@ -95,9 +152,10 @@
                     <button class="modal-button close" id="cancel-edit">Cancel</button>
                 </div>
             </div>
-        </div>
-        <!-- ////////////////////End of Modal Section//////////////////// -->
-
+        </div>-->
+        
+        
+        
         <div class ="wrapper">    
 
             <!-- ////////////////////////////Main Sidebar//////////////////////////// -->
@@ -110,7 +168,7 @@
                     <div class="nav-link" id="inventory"><i class="material-icons" id="sidebar-icon">list_alt</i>Inventory</div>
                     <div class="nav-link" id="lists"><i class="material-icons" id="sidebar-icon">check</i>Lists</div>
                     <div class="nav-link" id="reports"><i class="material-icons" id="sidebar-icon">pie_chart</i>Reports</div>
-                    <div class="nav-link" id="analytics"><i class="material-icons" id="sidebar-icon">insert_chart</i>Analytics</div>
+                    <div class="nav-link" id="analytics"><i class="material-icons" id="sidebar-icon"><a href="analytics.html" class="sidebar-link">insert_chart</i>Analytics</a></div>
                     <div class="nav-link" id="documents"><i class="material-icons" id="sidebar-icon">insert_drive_file</i>Documents</div>
                 </nav>
                 <div class="sidebar-bottom">
