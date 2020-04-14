@@ -29,6 +29,7 @@
 
 #right-module {
     grid-area: right;
+    width:100%;
 }
 
 #bottom-module { 
@@ -75,4 +76,14 @@
 
 #sold-items-table td:last-child {
     padding-right: 0;
+}
+
+#tot-num-sales {
+    float:right;
+    margin-right: 15%;
+}
+
+#sales-tot-title {
+    font-weight: bold;
+    text-decoration: underline;
 }

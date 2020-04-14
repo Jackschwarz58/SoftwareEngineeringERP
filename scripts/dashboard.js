@@ -1,3 +1,16 @@
+var modal = document.getElementById("addModal");
+var btn = document.getElementById("openAdd");
+var span = document.getElementsByClassName("close")[0];
+var closeAddButtons = document.getElementById("cancelAdd");
+
+
+var editModal = document.getElementById("editModal");
+var closeEdit = document.getElementsByClassName("close-edit")[0];
+var closeEditButtons = document.getElementById("cancel-edit");
+
+var moreTagsButton = document.getElementById("more-tags-button");
+var moreTagsButtonEdit = document.getElementById("more-tags-button-edit");
+
 var chart = new frappe.Chart("#line-graph", { //Need to replace with SQL data once imported
     data:{
         labels: ["Jan 3rd","Jan 10th", "Jan 17th", "Jan 24th", "Jan 31st",
@@ -35,3 +48,35 @@ function generateDummyData() { //Temporary Method to generate Table data for "Re
     return dataElement;
 }
 //----------------------------Temporary Methods to generate Table data for "Recent Sales"----------------------------
+
+var chart = new frappe.Chart("#bar-chart", { //Need to replace with SQL data once imported
+    data:{
+        labels: ["Yellow Shirt (L)","Black Shirt (M)", "Black Jacket (M)", "Maroon Shirt (S)", "Red Shirt (L)",
+        "Denim Jacket (M)", "Grey Hoodie (L)", "Black Jacket (S))"
+    ],
+    datasets: [
+        {
+            name: "Top Selling Inventory", type: "bar",
+            values: [132, 110, 98, 94, 88, 80, 76, 71]
+        }
+    ]
+    },
+    type: 'bar', //'bar', 'line', 'scatter', 'pie', 'percentage'
+    height: 200
+});
+
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+closeAddButtons.onclick = function() {
+    modal.style.display = "none";
+} 
+
+moreTagsButton.onclick = function() {
+    document.getElementById("tag-field-container").insertAdjacentHTML('beforeend',"<input placeholder=\"Tag\"class=\"input-field add-tags-field\" type=\"text\" name=\"tags\" size=\"10\">");
+}
