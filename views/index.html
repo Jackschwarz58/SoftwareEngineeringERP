@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.5.3/dist/js/tabulator.min.js"></script>
+        <script src="https://unpkg.com/frappe-charts@1.1.0/dist/frappe-charts.min.iife.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        
+        <link rel="stylesheet" href="/stylesheets/reset.css">
+        <link rel="stylesheet" href="/stylesheets/login.css">
+        
+        <script type="text/javascript" src="scripts/test.js"></script>
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300&display=swap">
+        <link rel="stylesheet" href="https://unpkg.com/tabulator-tables@4.5.3/dist/css/tabulator.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    </head>
+    <body>
+
+        <div class ="wrapper">    
+            <div class="main">
+                <div class="page-header">
+                    <div id="banner-title"><span style="color:aqua">ERP</span>Project</div>
+                </div>
+                <span id="page-subheading">
+                    ERP Project is an <span style="color:aqua;">in-progress</span> inventory management website designed by students at The University of Oklahoma during their CS 4273 course. <br><br><br><br> <span style="font-size: 1.5vw;">Please <span style="color:aqua;">Login</span> to Continue</span>
+                    <a class="button" href="/inventory.html">CLICK FOR INVENTORY</a>
+                </span>
+            </div>
+            <div class="login-fields">
+                <form id="login-form">
+                    <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username">
+                    <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
+                    <input type="submit" value="Login" id="login-form-submit" class="login-form-buttons">
+                    <input type="submit" value="Create Account" id="login-form-create" class="login-form-buttons">
+                </form>
+                
+            </div>
+        </div>
+        
+        <footer>
+            &copy; SE ERP Project | CS4273 | 2020
+        </footer>
+    </body>
+</html>
