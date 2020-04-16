@@ -1,15 +1,16 @@
 .dashboard-inner {
     display:grid;
     grid-template-areas: 
-        "top top top top"
-        "left right right right"
-        "btm btm btm btm";
+        "top top top"
+        "left right right"
+        "btm btm btm";
     grid-gap: 10px;
     padding: 15px;
+    width: 98%;
 }
 
 .module {
-    padding: 10px;
+    padding: 4px;
 }
 
 .module-title {
@@ -18,7 +19,7 @@
 
 #top-module {
     grid-area: top;
-    width:inherit;
+    width:98%;
 }
 
 #left-module {
@@ -29,7 +30,7 @@
 
 #right-module {
     grid-area: right;
-    width:100%;
+    width:98%;
 }
 
 #bottom-module { 
