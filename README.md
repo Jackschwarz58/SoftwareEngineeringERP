@@ -4,7 +4,7 @@ Since we are building an ERP (Enterprise resource planning) system from scratch,
 ---
 
 ### Front-End Implementation
-For the front-end implementation, we figured we could either create a web application using HTML, CSS, and Javascript, or we could create a native application using a Java or Python GUI framework. We ultimately decided on a web application as this was a more convenient way of accessing our program.
+For the front-end implementation, we figured we could either create a web application using HTML, CSS, and Javascript, or we could create a native application using a Java or Python GUI framework. We ultimately decided on a web application as this was a more convenient way for users to access our program.
 
 ### Back-End Implementation
 
