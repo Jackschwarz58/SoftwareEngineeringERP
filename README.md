@@ -1,3 +1,12 @@
+# Implementation
+Since we are building an ERP system from scratch, we need both a strong front-end and back-end to meet the requirements of the project. Therefore, we deciced on a web application built using HTML, CSS, and Javascript, which is then fed data from a SQL databse.
+
+---
+
+### Front-End Implementation
+
+### Back-End Implementation
+
 # Testing
 As our program is mainly web based and reliant on user provided data, our tests mainly consists of csv files with sample data. Most of our further testing is based on us using the program is specified ways to make sure of intended functionality. 
 
