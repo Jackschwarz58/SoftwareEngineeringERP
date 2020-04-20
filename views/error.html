@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
-<body>
-
-<h1>Error</h1>
-
-    <p>
-        <img src="http://www.ou.edu/content/coe/cs/people/jabrzemski/_jcr_content/contentpar/image.img.jpg/1503070375247.jpg">
-    </p>
-
-</body>
+    <head>
+        <title>Can't Find Page</title>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+        <link rel ="stylesheet" href="/stylesheets/error.css">
+    </head>
+    <body>
+        <span id="header-text"><span style="color: aqua">Uh Oh.</span><br> Something went wrong.</span>
+        <div id="wrapper">
+            <button id="back-page" onclick="goBack()">Go Back</button>
+            <p>
+                <img src="http://www.ou.edu/content/coe/cs/people/jabrzemski/_jcr_content/contentpar/image.img.jpg/1503070375247.jpg">
+            </p>
+        </div>
+    </body>
 </html>
-
-

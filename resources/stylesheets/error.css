@@ -1,0 +1,23 @@
+html, body {
+    height:100%;
+    background-color: #2D3033;
+    overflow-y: hidden;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    color:white;
+    text-align: center;
+    vertical-align: middle;
+    margin: 7vh 20vw;
+}
+
+#wrapper {
+    height:100%;
+    padding-top: 20px;
+}
+
+#header-text {
+    font-size: 48px;
+    font-weight: 300;
+}

@@ -9,53 +9,45 @@ var salesBtn = document.getElementById("openSales");
 var closeSales = document.getElementById("closeSalesModal");
 var cancelSaleButton = document.getElementById("cancelSale");
 
-
-
-
 var salesData;
-var dates = [];
-var minDate;
-var maxDate;
 var salesWithinSevenWeeks = [];
+var monthAbbr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+var listOfPastSevenDates = [];
+var dateTest = ["Jan 3rd","Jan 10th", "Jan 17th", "Jan 24th", "Jan 31st",
+                "Feb 7th", "Feb 14th"];
+var dateLabels =[];
+var weekByWeekSales = {};
+var oneWeek = 604800000;
+var salesPerWeek = [];
 
 $.ajax({
     url: "/file/pullSalesData",
     method: 'GET',
     async:false,
     success: function(data){
-        console.log(typeof data + " == " + data.length +"===="+ JSON.stringify(data));
         salesData = data;
     }
-})
-
+});
 
 window.onload = function() {
-    findDateRange();
     getWeeklySales();
+    getChartLabels();
+    createWeeklySalesChart();
+    getSalesPerWeekList();
+    getQuanSoldWeeksChart();
 };
-
-function findDateRange() {
-    for(var i = 0; i < salesData.length; ++i) {
-        console.log(salesData[i].dateReported);
-        dates.push(salesData[i].dateReported);
-    }
-    minDate = Math.min.apply(false,dates);
-    maxDate = Math.max.apply(false,dates);
-}
 
 function getWeeklySales() {
     var today = new Date().getTime();
-    var oneWeek = 604800;
     var sevenWeeks = oneWeek * 7;
     var withinSevenWeeks = today - sevenWeeks;
     console.log("Today: "  + today + ' Within 7 weeks: ' + withinSevenWeeks);
-    
+
     for(var i = 0; i < salesData.length; ++i) {
         if(salesData[i].dateReported >= withinSevenWeeks){
             salesWithinSevenWeeks.push(salesData[i]);
         }
     }
-    console.log("Sales Within: " + JSON.stringify(salesWithinSevenWeeks));
 }
 
 function addNewSale() {
@@ -63,27 +55,76 @@ function addNewSale() {
     var amtSold = document.getElementById("sale-quan-field").value;
     var priceSold = document.getElementById("sale-price-field").value;
     var now = new Date().getTime();
-    
+
     var newSale = {name: itemName,sold:amtSold, money:priceSold, dateReported: now};
     sendSalesData(newSale);
 }
 
+function getChartLabels() {
+    var prevSaturday = new Date();
+    dateLabels.push((monthAbbr[prevSaturday.getMonth()] + " " + prevSaturday.getDate()));
+    prevSaturday.setDate(prevSaturday.getDate() - (prevSaturday.getDay() + 1) % 7);
 
-var chart = new frappe.Chart("#line-graph", { //Need to replace with SQL data once imported
-    data:{
-        labels: ["Jan 3rd","Jan 10th", "Jan 17th", "Jan 24th", "Jan 31st",
-                 "Feb 7th", "Feb 14th"],
-        datasets: [
-            {
-                name: "Total Inventory", type: "Line",
-                values: [945, 998, 769, 812, 834, 801, 883]
+    for(var i = 0; i < 6; ++i) {
+        dateLabels.push((monthAbbr[prevSaturday.getMonth()] + " " + prevSaturday.getDate()));
+        listOfPastSevenDates += prevSaturday;
+        prevSaturday.setDate(prevSaturday.getDate() - 7);
+
+    }
+    dateLabels.reverse();
+}
+
+function isDateWithinRange(toCheck, minVal, maxVal) {
+    var currentDate = new Date(parseInt(toCheck));
+    var minDate = new Date(minVal);
+    var maxDate =  new Date(maxVal);
+
+    if (currentDate > minDate && currentDate < maxDate){return 1;}
+    else{return 0;}
+}
+
+function getSalesPerWeekList() {
+    var now = new Date().getTime();
+    
+    var j = 1;
+    for(var i = 6; i >= 0; --i) {
+        weekByWeekSales[dateLabels[i]] = new Array();
+        
+        for(var k = 0; k < salesWithinSevenWeeks.length; ++k) {
+            if(isDateWithinRange(salesWithinSevenWeeks[k].dateReported, now - (oneWeek * j), (now - (oneWeek * (j - 1))))) {
+                weekByWeekSales[dateLabels[i]].push(salesWithinSevenWeeks[k]);
             }
-        ]
-    },
-    type: 'line', //'bar', 'line', 'scatter', 'pie', 'percentage'
-    height: 250
-});
+        }
+        j++;
+    }
+}
 
+function getQuanSoldWeeksChart() {    
+    for(var i = 0; i < 7; ++i) {
+        var total = 0;
+        for(var k = 0; k < weekByWeekSales[dateLabels[i]].length; ++k) {
+            //console.log(weekByWeekSales[dateLabels[i]]);
+            total += parseInt(weekByWeekSales[dateLabels[i]][k].sold);
+        }
+        salesPerWeek.push(total);
+    }
+}
+
+function createWeeklySalesChart() {
+    var chart = new frappe.Chart("#line-graph", {
+        data:{
+            labels: dateLabels,
+            datasets: [
+                {
+                    name: "Total Inventory", type: "Line",
+                    values: salesPerWeek
+                }
+            ]
+        },
+        type: 'line', //'bar', 'line', 'scatter', 'pie', 'percentage'
+        height: 250
+    });
+}
 
 //----------------------------Temporary Methods to generate Table data for "Recent Sales"----------------------------
 var myVar = setInterval(addDummyData, 5000);
@@ -145,9 +186,6 @@ closeSales.onclick = function() {
 cancelSaleButton.onclick = function() {
     salesModal.style.display = "none";
 } 
-
-
-
 
 moreTagsButton.onclick = function() {
     document.getElementById("tag-field-container").insertAdjacentHTML('beforeend',"<input placeholder=\"Tag\"class=\"input-field add-tags-field\" type=\"text\" name=\"tags\" size=\"10\">");
