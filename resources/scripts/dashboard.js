@@ -1,13 +1,4 @@
-var modal = document.getElementById("addModal");
-var btn = document.getElementById("openAdd");
-var span = document.getElementsByClassName("close")[0];
-var closeAddButtons = document.getElementById("cancelAdd");
-var moreTagsButton = document.getElementById("more-tags-button");
-var moreTagsButtonEdit = document.getElementById("more-tags-button-edit");
 var salesModal = document.getElementById("salesModal");
-var salesBtn = document.getElementById("openSales");
-var closeSales = document.getElementById("closeSalesModal");
-var cancelSaleButton = document.getElementById("cancelSale");
 
 var salesData;
 var salesWithinSevenWeeks = [];
@@ -19,6 +10,9 @@ var dateLabels =[];
 var weekByWeekSales = {};
 var oneWeek = 604800000;
 var salesPerWeek = [];
+var topSellingWeeklyInvLabels = [];
+var topSellingWeeklyInvSales = [];
+
 
 $.ajax({
     url: "/file/pullSalesData",
@@ -32,9 +26,12 @@ $.ajax({
 window.onload = function() {
     getWeeklySales();
     getChartLabels();
-    createWeeklySalesChart();
     getSalesPerWeekList();
     getQuanSoldWeeksChart();
+    getTopSellingInventory();
+    
+    createWeeklySalesChart();
+    createTopSellingChart();
 };
 
 function getWeeklySales() {
@@ -50,14 +47,33 @@ function getWeeklySales() {
     }
 }
 
+
 function addNewSale() {
     var itemName = document.getElementById("sale-name-field").value;
     var amtSold = document.getElementById("sale-quan-field").value;
     var priceSold = document.getElementById("sale-price-field").value;
     var now = new Date().getTime();
 
+    if(itemName == "" || amtSold == "" || priceSold == ""){
+        console.log("A Field is Missing!");
+        var fieldsMissing ="";
+
+        if(itemName =="")
+            fieldsMissing += "    -Item Name\n"
+        if(amtSold =="")
+            fieldsMissing += "    -Amount Sold\n"
+        if(priceSold =="")
+            fieldsMissing += "    -Price\n"
+
+        alert("Invalid Form: Missing one or more required fields:\n" + fieldsMissing);
+
+        return;
+    }
+
     var newSale = {name: itemName,sold:amtSold, money:priceSold, dateReported: now};
     sendSalesData(newSale);
+
+    salesModal.style.display = "none";
 }
 
 function getChartLabels() {
@@ -85,11 +101,11 @@ function isDateWithinRange(toCheck, minVal, maxVal) {
 
 function getSalesPerWeekList() {
     var now = new Date().getTime();
-    
+
     var j = 1;
     for(var i = 6; i >= 0; --i) {
         weekByWeekSales[dateLabels[i]] = new Array();
-        
+
         for(var k = 0; k < salesWithinSevenWeeks.length; ++k) {
             if(isDateWithinRange(salesWithinSevenWeeks[k].dateReported, now - (oneWeek * j), (now - (oneWeek * (j - 1))))) {
                 weekByWeekSales[dateLabels[i]].push(salesWithinSevenWeeks[k]);
@@ -103,10 +119,28 @@ function getQuanSoldWeeksChart() {
     for(var i = 0; i < 7; ++i) {
         var total = 0;
         for(var k = 0; k < weekByWeekSales[dateLabels[i]].length; ++k) {
-            //console.log(weekByWeekSales[dateLabels[i]]);
             total += parseInt(weekByWeekSales[dateLabels[i]][k].sold);
         }
         salesPerWeek.push(total);
+    }
+}
+
+function getTopSellingInventory() {
+    var thisWeek = weekByWeekSales[dateLabels[dateLabels.length - 1]];
+
+
+    thisWeek.sort(function(a, b) {
+        return parseInt(b.money) - parseInt(a.money);
+    });
+
+    if(thisWeek.length >= 8)
+        thisWeek = thisWeek.slice(0,8);
+    else
+        thisWeek = thisWeek.slice(0,thisWeek.length);
+
+    for(var i = 0; i < thisWeek.length; ++i) {
+        topSellingWeeklyInvLabels.push(thisWeek[i].name);
+        topSellingWeeklyInvSales.push(parseInt(thisWeek[i].money));
     }
 }
 
@@ -121,16 +155,15 @@ function createWeeklySalesChart() {
                 }
             ]
         },
-        type: 'line', //'bar', 'line', 'scatter', 'pie', 'percentage'
+        type: 'line',
         height: 250
     });
 }
 
-//----------------------------Temporary Methods to generate Table data for "Recent Sales"----------------------------
 var myVar = setInterval(addDummyData, 5000);
 
-function addDummyData() { 
-    var x = document.getElementById('sold-items-table').insertRow(0);
+function addDummyData() { //TODO: DELETE THIS 
+    var x = document.getElementById('sold-items-table').insertRow(1);
     var y = x.insertCell(0);
     var z = x.insertCell(1);
     y.innerHTML= Math.floor(Math.random() * 100);
@@ -145,48 +178,29 @@ function generateDummyData() { //Temporary Method to generate Table data for "Re
     var dataElement = colors[Math.floor(Math.random() * 7)]+ " " +titles[Math.floor(Math.random() * 4)] +  " " + sizes[Math.floor(Math.random() * 5)];
     return dataElement;
 }
-//----------------------------Temporary Methods to generate Table data for "Recent Sales"----------------------------
 
-var chart = new frappe.Chart("#bar-chart", { //Need to replace with SQL data once imported
-    data:{
-        labels: ["Yellow Shirt (L)","Black Shirt (M)", "Black Jacket (M)", "Maroon Shirt (S)", "Red Shirt (L)",
-                 "Denim Jacket (M)", "Grey Hoodie (L)", "Black Jacket (S))"
-                ],
-        datasets: [
-            {
-                name: "Top Selling Inventory", type: "bar",
-                values: [132, 110, 98, 94, 88, 80, 76, 71]
-            }
-        ]
-    },
-    type: 'bar', //'bar', 'line', 'scatter', 'pie', 'percentage'
-    height: 200
-});
-
-btn.onclick = function() {
-    modal.style.display = "block";
+function createTopSellingChart() {
+    var chart = new frappe.Chart("#bar-chart", { //Need to replace with SQL data once imported
+        data:{
+            labels: topSellingWeeklyInvLabels,
+            datasets: [
+                {
+                    name: "Top Selling Inventory", type: "bar",
+                    values: topSellingWeeklyInvSales
+                }
+            ]
+        },
+        type: 'bar', //'bar', 'line', 'scatter', 'pie', 'percentage'
+        height: 200
+    });
+    
+    var salesSum = topSellingWeeklyInvSales.reduce(function(a, b){
+        return a + b;
+    }, 0);
+    
+    document.getElementById("tot-sales-number").innerHTML = currencyFormat(salesSum);
 }
 
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-closeAddButtons.onclick = function() {
-    modal.style.display = "none";
-} 
-
-salesBtn.onclick = function() {
-    salesModal.style.display = "block";
-}
-
-closeSales.onclick = function() {
-    salesModal.style.display = "none";
-} 
-
-cancelSaleButton.onclick = function() {
-    salesModal.style.display = "none";
-} 
-
-moreTagsButton.onclick = function() {
-    document.getElementById("tag-field-container").insertAdjacentHTML('beforeend',"<input placeholder=\"Tag\"class=\"input-field add-tags-field\" type=\"text\" name=\"tags\" size=\"10\">");
+function currencyFormat(num) {
+  return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
