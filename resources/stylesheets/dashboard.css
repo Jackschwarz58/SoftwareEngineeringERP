@@ -65,7 +65,7 @@
     width:100%;
 }
 
-#sold-items-table th, td {
+#sold-items-table, td {
   padding: 5px;
   text-align: left;
   border-bottom: .7px solid #dadada;
@@ -79,7 +79,7 @@
     padding-right: 0;
 }
 
-#tot-num-sales {
+#tot-num-sales-text {
     float:right;
     margin-right: 15%;
 }
