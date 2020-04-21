@@ -12,6 +12,7 @@ var oneWeek = 604800000;
 var salesPerWeek = [];
 var topSellingWeeklyInvLabels = [];
 var topSellingWeeklyInvSales = [];
+var thisWeek = [];
 
 
 $.ajax({
@@ -32,6 +33,7 @@ window.onload = function() {
     
     createWeeklySalesChart();
     createTopSellingChart();
+    createRecentSalesList()
 };
 
 function getWeeklySales() {
@@ -126,8 +128,7 @@ function getQuanSoldWeeksChart() {
 }
 
 function getTopSellingInventory() {
-    var thisWeek = weekByWeekSales[dateLabels[dateLabels.length - 1]];
-
+    thisWeek = weekByWeekSales[dateLabels[dateLabels.length - 1]];
 
     thisWeek.sort(function(a, b) {
         return parseInt(b.money) - parseInt(a.money);
@@ -160,23 +161,22 @@ function createWeeklySalesChart() {
     });
 }
 
-var myVar = setInterval(addDummyData, 5000);
-
-function addDummyData() { //TODO: DELETE THIS 
-    var x = document.getElementById('sold-items-table').insertRow(1);
+function addSalesListData(num, name) {
+    var x = document.getElementById('sold-items-table').insertRow(0);
     var y = x.insertCell(0);
     var z = x.insertCell(1);
-    y.innerHTML= Math.floor(Math.random() * 100);
-    z.innerHTML= generateDummyData();
+    y.innerHTML= num;
+    z.innerHTML= name;
 }
 
-function generateDummyData() { //Temporary Method to generate Table data for "Recent Sales"
-    var titles = ["T-Shirt", "Hoodie", "Jacket", "Shirt"];
-    var colors = ["Red", "Blue", "Purple", "Forrest Green", "Yellow", "Orange", "Pink"];
-    var sizes = ["(S)", "(M)", "(L)", "(XS)", "(XL)"];
-
-    var dataElement = colors[Math.floor(Math.random() * 7)]+ " " +titles[Math.floor(Math.random() * 4)] +  " " + sizes[Math.floor(Math.random() * 5)];
-    return dataElement;
+function createRecentSalesList() {
+    var sortedByDate = salesData.sort(function(a, b) {
+        return parseInt(b.dateReported) - parseInt(a.dateReported);
+    });
+    
+    for(var i = 0; i < 9; ++i) {
+        addSalesListData(parseInt(sortedByDate[i].sold), sortedByDate[i].name);
+    }
 }
 
 function createTopSellingChart() {
