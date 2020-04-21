@@ -23,11 +23,11 @@
                     <span style="color:aqua">ERP</span>Project
                 </div>
                 <nav>
-                    <div class="nav-link" id="activities"><i class="material-icons" id="sidebar-icon">dashboard</i>Dashboard</div>
+                    <div class="nav-link" id="dashboard"><i class="material-icons" id="sidebar-icon"><a href="/dashboard.html" class="sidebar-link">dashboard</i>Dashboard</a></div>
                     <div class="nav-link" id="inventory"><i class="material-icons" id="sidebar-icon"><a href="/inventory.html" class="sidebar-link">list_alt</i>Inventory</a></div>
-                    <div class="nav-link" id="sales"><i class="material-icons" id="sidebar-icon"><a href="/sales.html" class="sidebar-link">monetization_on</i>Sales</a>Sales</div>
+                    <div class="nav-link" id="sales"><i class="material-icons" id="sidebar-icon"><a href="/sales.html" class="sidebar-link">monetization_on</i>Sales</a></div>
+                    <div class="nav-link" id="analytics"><i class="material-icons" id="sidebar-icon">insert_chart</i>Analytics</div>
                     <div class="nav-link" id="reports"><i class="material-icons" id="sidebar-icon">pie_chart</i>Reports</div>
-                    <a href="analytics.html" class="sidebar-link"><div class="nav-link" id="analytics"><i class="material-icons" id="sidebar-icon">insert_chart</i>Analytics</div></a>
                     <div class="nav-link" id="documents"><i class="material-icons" id="sidebar-icon">insert_drive_file</i>Documents</div>
                 </nav>
                 <div class="sidebar-bottom">
@@ -37,7 +37,7 @@
             <!-- ////////////////////////////Main Sidebar End//////////////////////////// -->
             
             <div class="main">
-                <div class="page-header" id="dashboard-banner">
+                <div class="page-header" id="multi-banner">
                     <div id="banner-title">Analytics</div>
                     <div class="top-actions">
                         <button type="button" class="table-button" id="openAdd"><i class="material-icons" id="table-icon" title="Report a Sale">receipt</i><span class="table-button-text"></span></button>
@@ -45,7 +45,7 @@
                         <button type="button" class="table-button"><i class="material-icons" id="table-icon" title="Add Inventory">note_add</i><span class="table-button-text"></span></button>
                     </div>
                 </div>
-                <div class="dashboard-inner">
+                <div class="analytics-inner">
 
                     <div class="module" id="top-module"><span class="module-title" id="top-module-title">Monthly Sales</span>
                         <div id="heat-map"></div>

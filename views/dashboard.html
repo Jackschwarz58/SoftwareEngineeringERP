@@ -8,6 +8,8 @@
         <script type="text/javascript" src="scripts/fileClient.js"></script>
         <script type="text/javascript" src="scripts/dashboard.js" async></script>
         <script type="text/javascript" src="scripts/sidebar.js" async></script>
+        <script type="text/javascript" src="scripts/dashboardListeners.js" async></script>
+        <script type="text/javascript" src="scripts/tabs.js" async></script>
 
         <link rel="stylesheet" href="/stylesheets/reset.css">
         <link rel="stylesheet" href="/stylesheets/styles.css">
@@ -67,9 +69,6 @@
                 </div>
             </div>
 
-
-
-
             <div id="salesModal" class="modal">
                 <div class="modal-content">
                     <span id="closeSalesModal">&times;</span>
@@ -99,7 +98,7 @@
                         <button class="modal-footer-button" id="confirmSale" onclick="addNewSale()">Add</button>
                         <button class="modal-footer-button" id="cancelSale">Cancel</button>
                     </div>
-                    
+
                 </div>
             </div>
 
@@ -111,9 +110,9 @@
                 <nav>
                     <div class="nav-link" id="activities"><i class="material-icons" id="sidebar-icon">dashboard</i>Dashboard</div>
                     <div class="nav-link" id="inventory"><i class="material-icons" id="sidebar-icon"><a href="/inventory.html" class="sidebar-link">list_alt</i>Inventory</a></div>
-                    <div class="nav-link" id="sales"><i class="material-icons" id="sidebar-icon"><a href="/sales.html" class="sidebar-link">monetization_on</i>Sales</a>Sales</div>
-                    <div class="nav-link" id="reports"><i class="material-icons" id="sidebar-icon">pie_chart</i>Reports</div>
+                    <div class="nav-link" id="sales"><i class="material-icons" id="sidebar-icon"><a href="/sales.html" class="sidebar-link">monetization_on</i>Sales</a></div>
                     <div class="nav-link" id="analytics"><i class="material-icons" id="sidebar-icon"><a href="/analytics.html" class="sidebar-link">insert_chart</i>Analytics</a></div>
+                    <div class="nav-link" id="reports"><i class="material-icons" id="sidebar-icon">pie_chart</i>Reports</div>
                     <div class="nav-link" id="documents"><i class="material-icons" id="sidebar-icon">insert_drive_file</i>Documents</div>
                 </nav>
                 <div class="sidebar-bottom">
@@ -121,9 +120,8 @@
                 </div>
             </div>
             <!-- ////////////////////////////Main Sidebar End//////////////////////////// -->
-
             <div class="main">
-                <div class="page-header" id="dashboard-banner">
+                <div class="page-header" id="multi-banner">
                     <div id="banner-title">Dashboard</div>
                     <div class="top-actions">
                         <button type="button" class="table-button" id="openSales"><i class="material-icons" id="table-icon" title="Report a Sale">monetization_on</i><span class="table-button-text"></span></button>
@@ -132,9 +130,9 @@
                     </div>
                 </div>
                 <div class="dashboard-inner">
-                    <div class="module" id="top-module"><span class="module-title" id="top-module-title">Weekly Sales Over Time</span><br><div id="line-graph"></div></div>
+                    <div class="module" id="top-module"><span class="module-title" id="top-module-title">Weekly Sales Over Time</span>   (USD/wk)<br><div id="line-graph"></div></div>
 
-                    <div class="module" id="left-module"><span class="module-title" id="left-module-title">Recent Sales</span>
+                    <div class="module" id="left-module"><span class="module-title" id="left-module-title">Recent Sales</span>    (Units)
                         <div class="scrollable" id="sold-items-scrollable">
                             <table class="item-table" id="sold-items-table">
                                 <tbody>
@@ -151,7 +149,7 @@
                         </div>
                     </div>
 
-                    <div class="module" id="right-module"><div class="selling-title"><span class="module-title" id="left-module-title">Top Selling Inventory</span>   (Weekly)<span id="tot-num-sales"><span id="sales-tot-title">Sales Total: </span>$4,512.78</span></div><div id="bar-chart"></div></div>
+                    <div class="module" id="right-module"><div class="selling-title"><span class="module-title" id="left-module-title">Top Selling Inventory</span>   (Weekly)<span id="tot-num-sales-text"><span id="sales-tot-title">Sales Total: </span><span id="tot-sales-number">[num placeholder]</span></span></div><div id="bar-chart"></div></div>
                     <div class="module" id="bottom-module"></div>
                 </div>
             </div>
