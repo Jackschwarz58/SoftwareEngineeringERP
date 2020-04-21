@@ -9,7 +9,7 @@ body {
     color:white;
     text-align: center;
     vertical-align: middle;
-    margin: 7vh 20vw;
+    margin: 4vh 20vw;
 }
 
 #wrapper {
@@ -20,4 +20,14 @@ body {
 #header-text {
     font-size: 48px;
     font-weight: 300;
+}
+
+#error-image-container {
+    
+}
+
+#error-img {
+    padding-top: 20px;
+    width:100%;
+    height: auto;
 }
