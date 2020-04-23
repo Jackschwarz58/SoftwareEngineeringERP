@@ -14,7 +14,7 @@
 
 .modal-content {
   position: relative;
-  background-color: #fefefe;
+  background-color: #F6F6F7;
   margin: auto;
   padding: 20px 20px 20px 20px;
   border: 1px solid #888;
@@ -26,11 +26,12 @@
   animation-duration: 0.4s
 }
 
-.modal-footer {
-  padding: 15px 16px 5px 16px;
-  background-color: inherit;
-  color: white;
-  height:25px;
+.modal-content input {
+    border: 1px solid #ccc;
+}
+
+.modal-subheading {
+    font-size:24px;
 }
 
 .close, .close-edit {
@@ -47,20 +48,6 @@
   color: black;
   text-decoration: none;
   cursor: pointer;
-} 
-
-/* Button to Trigger Modal */
-.modal-button {
-    font-size: 16px;
-    font-family: 'Lato', sans-serif;
-    padding: 10px 15px;
-    text-align: center;
-    display: inline-block;
-    background-color: #ddd;
-    border:none;
-    text-decoration: none;
-    opacity:100%;
-    margin: 4px 2px;
 }
 
 @-webkit-keyframes animatetop {
@@ -73,89 +60,214 @@
   to {top:0; opacity:1}
 }
 
-.input-field {
-    width:100%;
-    padding: 12px 20px;
-    margin: 8px 0px;
-    box-sizing:border-box;
-    font-size: 20px;
-    border-style: 1px solid #eee;
-}
-.input-field[type=text]:focus {
-    outline:none;
-    border: 3px solid #999;
+/*Modal Content Divs*/
+.modal-input-content {
+    padding: 1.4vh 0px;
 }
 
-.input-field::placeholder {
-    opacity: 50%;
+#modal-header {
+    font-size:46px;
+    width: 100%;
+    left:0;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px grey solid;
+}
+
+
+.modal-confirm-buttons {
+    width:20%;
+    position:absolute;
+    right:0;
+    bottom:0;
+    text-align: right;
+    justify-content: end;
+    margin:10px;
+}
+
+.modal-footer-button {
+    font-size: 18px;
+    font-family: 'Lato', sans-serif;
+    background-color: #E3E3E4;
+    border: 1px #ccc solid;
+    margin: 2px;
+}
+
+.modal-footer-button:hover {
+    background-color: #eee;
+}
+
+.input-field {
+    font-size: 18px;
+    padding: 5px;
 }
 
 .input-field-number {
-    padding: 12px 20px;
-    margin: 8px 0px;
-    box-sizing:border-box;
-    font-size: 18px; /*20px*/
-}
-
-.input-field-number[type=number]:focus {
-    outline:none;
-    border: 3px solid #999;
-}
-
-.input-field-number::placeholder {
-    opacity: 50%;
-}
-
-.modal-headline {
-    font-size: 36px;
-    padding-bottom: 25px;
-}
-
-.modal-subheading {
-    font-size:24px;
-    padding: 5px 5px 5px 0px;
-}
-
-.modal-num-fields {
-    width:100%;
-    padding-bottom: 10px;
-    height: 100%;
-    display:block;
-}
-
-#quantity-input {
-    display: block;
-    float:left;
-    width:40%;
-    padding-bottom: 10px;
-}
-
-#price-input {
-    display: block;
-    float:right;
-    width:60%;
-    padding-bottom: 10px;
-}
-
-.description-field {
-    height:auto;
+    font-size: 18px;
+    padding: 5px;
 }
 
 .input-field-large {
-    width:100%;
-    padding: 12px 20px;
-    margin: 8px 0px;
-    box-sizing:border-box;
-    font-size: 20px;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.required-tag {
+    color:red;
+}
+
+.price-qualifier {
+    font-size: 16px;
+}
+
+/*Name Content Styling*/
+#name-input-content {
+    display: grid;
+}
+
+#name-subheading {
+    grid-row: 1;
+    margin-bottom: 10px;
+}
+
+#add-name-field {
+    grid-row:2;
+}
+
+#editNameInput {
+    grid-row:2;
+}
+
+/*Quantity Content Styling*/
+#quan-input-section {
+    display: grid;
+    width:30%;
+    float:left;
+}
+
+#quan-subheading {
+    grid-row: 1;
+    margin-bottom: 10px;
+}
+
+#add-quan-field {
+    grid-row:2;
+    width:50%;
+}
+
+#editQuanInput {
+    grid-row:2;
+    width:50%;
+}
+
+/*Price Content Styling*/
+#price-input-section {
+    display: grid;
+    width:30%;
+}
+
+#price-subheading {
+    grid-row: 1;
+    margin-bottom: 10px;
+}
+
+#add-price-field {
+    grid-row:2;
+    width:50%;
+}
+
+#editPriceInput {
+    grid-row:2;
+    width:50%;
+}
+
+/*Description Content Styling*/
+#desc-input-content {
+    display: grid;
+}
+
+#description-subheading {
+    grid-row: 1;
+    margin-bottom: 10px;
+}
+
+#add-desc-field {
+    grid-row:2;
+    border: 1px solid #ccc; 
     resize: none;
-    border-color: #ddd;
 }
 
-.input-field-large::placeholder {
-    opacity: 50%;
+#editDescInput {
+    grid-row:2;
+    border: 1px solid #ccc; 
+    resize: none;
 }
 
-.input-field-large[type=text]:focus {
-    outline:none;
-    border: 3px solid #999;
+/*Tags Content Styling*/
+#tags-input-content {
+    display: grid;
+}
+
+#tags-top-row {
+    grid-row: 1;
+    grid-column: 1;
+    margin-bottom: 10px;
+}
+
+.add-tags-field {
+    grid-row:2;
+    margin-right: 5px;
+    padding 2px;
+}
+
+#editTagsInput {
+    grid-row:2;
+    margin-right: 5px;
+    padding 2px;
+}
+
+#more-tags-button {
+    background-color: #F6F6F7;
+    border:none;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    color:black;
+    font-size: 14px;
+    margin-left:10px;
+    cursor: pointer;
+    font-family: 'lato', sans-serif;
+    font-weight: 700;
+    border: 1px #ccc solid;
+    grid-row:1;
+    grid-column: 1;
+}
+
+#more-tags-button:hover {
+    background-color: #eee;
+}
+
+#tag-field-container {
+    width:90%;
+}
+
+#more-tags-button-edit {
+    background-color: #F6F6F7;
+    border:none;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    color:black;
+    font-size: 14px;
+    margin-left:10px;
+    cursor: pointer;
+    font-family: 'lato', sans-serif;
+    font-weight: 700;
+    border: 1px #ccc solid;
+    grid-row:1;
+    grid-column: 1;
+}
+
+#more-tags-button-edit:hover {
+    background-color: #eee;
 }

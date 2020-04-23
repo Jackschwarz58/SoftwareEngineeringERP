@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <script src="https://unpkg.com/frappe-charts@1.1.0/dist/frappe-charts.min.iife.js"></script>
-
-        <script type="text/javascript" src="scripts/analytics.js" async></script>
-        <script type="text/javascript" src="scripts/sidebar.js" async></script>
-
-        <link rel="stylesheet" href="/stylesheets/reset.css">
-        <link rel="stylesheet" href="/stylesheets/styles.css">
-        <link rel="stylesheet" href="/stylesheets/analytics.css">
-
+        <link rel="stylesheet" href="../resources/stylesheets/reset.css">
+        <link rel="stylesheet" href="../resources//stylesheets/styles.css">
+        <link rel="stylesheet" href="../resources//stylesheets/analytics.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300&display=swap">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://unpkg.com/frappe-charts@1.1.0/dist/frappe-charts.min.iife.js"></script>
+        <script type="text/javascript" src="../resources/scripts/analytics.js" async></script>
+        <script type="text/javascript" src="../resources/scripts/sidebar.js" async></script>
     </head>
     <body>
 
@@ -39,27 +38,24 @@
             <div class="main">
                 <div class="page-header" id="multi-banner">
                     <div id="banner-title">Analytics</div>
-                    <div class="top-actions">
-                        <button type="button" class="table-button" id="openAdd"><i class="material-icons" id="table-icon" title="Report a Sale">receipt</i><span class="table-button-text"></span></button>
-                        
-                        <button type="button" class="table-button"><i class="material-icons" id="table-icon" title="Add Inventory">note_add</i><span class="table-button-text"></span></button>
-                    </div>
                 </div>
                 <div class="analytics-inner">
-
-                    <div class="module" id="top-module"><span class="module-title" id="top-module-title">Monthly Sales</span>
+                    <div class="module" id="top-module">
+                        <div class="module-title">Monthly Sales</div>
                         <div id="heat-map"></div>
                     </div>
-                    <div class="module" id="left-module"><span class="module-title" id="left-module-title">Surplus & Stockout</span>
+                    <div class="module" id="left-module">
+                        <div class="module-title">Surplus &amp; Stockout</div>
                         <div id="chart"></div>            
                     </div>
-                    <div class="module" id="right-module"><span class="module-title" id="right-module-title">Profit & Loss</span>
+                    <div class="module" id="right-module">
+                        <div class="module-title">Profit &amp; Loss</div>
                         <div id="right"></div>
                     </div>
-                    <div class="module" id="bottom-module"><span class="module-title" id="bottom-module-title">Forecast Demand</span>
+                    <div class="module" id="bottom-module">
+                        <div class="module-title">Forecast Demand</div>
                         <div id="regression"></div>
                     </div>
-                    
                 </div>
             </div>
         </div>

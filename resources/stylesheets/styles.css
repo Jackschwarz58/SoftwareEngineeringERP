@@ -29,7 +29,7 @@ footer {
     font-size: 2vh;
     color: white;
     background-color: #454545;
-    z-index: 1;
+    width 100%;
 }
 
 .wrapper {

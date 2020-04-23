@@ -1,46 +1,53 @@
-.analytics-inner {
-    display:grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 30% 40% 30%;
-    grid-template-areas: 
-        /*"top top top top"
-        "left right right right"
-        "btm btm btm btm";*/
-        "top top"
-        "left right"
-        "btm btm";
-    grid-gap: 1%;
-    padding: 0.5%;
-    overflow: hidden;
+.main {
+    height: 100%;
+    overflow: auto;
+}
 
+.analytics-inner {
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    grid-gap: 10px 10px;
+    grid-template-areas: 
+        "top top top top"
+        "left left right right"
+        "btm btm btm btm";
 }
 
 .module {
     padding: 10px;
     overflow: auto;
-    background-color: #dfe4ed;
-}
-.module:hover{
-    background-color: #a7beeb;
+    background-color: #ECECEC;/*#dfe4ed;*/
 }
 
 .module-title {
-    font-size: 150%;
+    font-size: 24px;
 }
 
 #top-module {
     grid-area: top;
+    width: auto;
+    background: 
+}
+
+#heat-map {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 #left-module{
     grid-area: left;
+    width: auto;
 }
 
 #right-module{
     grid-area: right;
+    width: auto;
 }
-
 
 #bottom-module { 
     grid-area: btm;
+    width: auto;
 }
