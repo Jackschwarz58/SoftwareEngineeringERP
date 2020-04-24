@@ -1,5 +1,12 @@
 var salesData;
 var todayDate = new Date();
+var heatMapStartDate = new Date(2019, 12, 1);
+var heatMapEndDate = new Date(2020, 12, 31);
+
+var salesByDay= {
+        start: heatMapStartDate,
+        end: heatMapEndDate
+}
 
 $.ajax({
     url: "/file/pullSalesData",
@@ -11,26 +18,37 @@ $.ajax({
 });
 
 window.onload = function() {
+    getSalesSeperatedByDay();
+    
     createMonthlySales();
     createProfitLoss();
     createSalesRatio();
     createForecastDemand();
 };
 
+function getSalesSeperatedByDay() {
+    var datapointsArray = {};
+    for(var i = 0; i < salesData.length; ++i) {
+        if(isDateWithinRange(salesData[i].dateReported, heatMapStartDate, heatMapEndDate)) {
+            datapointsArray[Math.floor(salesData[i].dateReported/1000)] =
+            parseInt(salesData[i].sold);
+        }
+    }
+    salesByDay.dataPoints = datapointsArray;
+}
+
+function isDateWithinRange(toCheck, minVal, maxVal) {
+    var currentDate = new Date(parseInt(toCheck));
+    var minDate = new Date(minVal);
+    var maxDate =  new Date(maxVal);
+
+    if (currentDate > minDate && currentDate < maxDate){return 1;}
+    else{return 0;}
+}
 
 function createMonthlySales(){
-    var startDate = new Date(todayDate.getFullYear() - 1, 12, 1);
-    var endDate = new Date(todayDate.getFullYear(), 12, 31);
     var hmap = new frappe.Chart("#heat-map", {
-        data:{
-            dataPoints: {
-                "1587620791": 2000, //These are Time-Stamps followed by data values
-                "1463673055": 113,
-                "1476892421": 57,
-            },
-            start: startDate, // a JS date object
-            end: endDate,
-        },
+        data: salesByDay,
         type: 'heatmap',
         colors: ['#e1daf2', '#c9b9f0', '#9c7bed', '#6a34ed', '#250478'],
     });
