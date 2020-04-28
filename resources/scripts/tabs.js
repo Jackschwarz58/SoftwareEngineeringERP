@@ -1,6 +1,8 @@
 var editModal = document.getElementById("editModal");
 var addModal = document.getElementById("addModal");
+var removeItemButton = document.getElementById("remove-item-edit");
 var rowClicked = "";
+var rowClickedIndex ;
 
 var setFilterButton = document.getElementById("search-filter-button");
 var clearFilterButton = document.getElementById("clear-filter-button");
@@ -10,7 +12,9 @@ var table = new Tabulator("#table", {
     placeholder: "N/A",
     rowClick:function(e, row){
         rowClicked = row.getData();
-        console.log(row.getData());
+        rowClickedIndex = row.getIndex();
+        console.log("(" + rowClickedIndex + ") \"" + rowClicked["name"] + "\"");
+        
 
         editModal.style.display = "block";   
         
@@ -153,4 +157,15 @@ clearFilterButton.onclick = function() {
     document.getElementById("filter-field").value ="";
     
     table.clearFilter();
+}
+
+function removeItem() {
+    if(confirm("Are you sure you want to delete this item?\n\nThis cannot be undone")) {
+        table.deleteRow(rowClickedIndex);
+        sendData(JSON.stringify(table.getData()));
+        editModal.style.display = "none";
+    }
+    else {
+        //Nothing
+    }
 }

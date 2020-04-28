@@ -74,7 +74,6 @@
     border-bottom: 1px grey solid;
 }
 
-
 .modal-confirm-buttons {
     width:20%;
     position:absolute;
@@ -95,6 +94,15 @@
 
 .modal-footer-button:hover {
     background-color: #eee;
+}
+
+#remove-item-edit {
+    color:red;
+}
+
+#remove-item-edit:hover {
+    background-color: orangered;
+    color: black;
 }
 
 .input-field {
