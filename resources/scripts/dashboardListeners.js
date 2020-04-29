@@ -13,6 +13,7 @@ closeSales.onclick = function() {
     document.getElementById("sale-price-field").value = "";
     
     salesModal.style.display = "none";
+    location.reload();
 } 
 
 cancelSaleButton.onclick = function() {
@@ -21,4 +22,5 @@ cancelSaleButton.onclick = function() {
     document.getElementById("sale-price-field").value = "";
     
     salesModal.style.display = "none";
+    location.reload();
 } 
