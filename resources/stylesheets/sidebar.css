@@ -1,0 +1,95 @@
+.sidebar {
+    padding: 15px 15px 15px 10px;
+    width: 11%;
+    background-color: #2D3033;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    color: white;
+}
+
+.nav-link {
+    font-size: 1.2vw;
+    text-align: left;
+    padding: 1vh 1vh 1vh .5vh;
+    margin-bottom: 1px;
+    margin-left: 3px;
+    margin-right: 0px;
+}
+
+.nav-link:hover {
+    color: skyblue;
+    background-color: #565656;
+    cursor: pointer;
+    margin-left: 0px;
+}
+
+.site-title {
+    padding-bottom: 30px;
+    padding-top: 10px;
+    font-size: 1.8vw;
+    margin: 1px 1px 1px 10px;
+    word-wrap: break-word;
+}
+
+#title-link {
+    text-decoration: none;
+    color:white;
+}
+
+#title-link: visited {
+    text-decoration: none;
+    color:white;
+}
+
+.sidebar-bottom {
+    position: absolute;
+    bottom:0;
+    padding-bottom: 10px;
+    border:none;
+    margin-left: 8px;
+}
+
+#sidebar-icon {
+    vertical-align:middle; 
+    padding-right: 6px;
+    padding-bottom: 4px; 
+    color:#FF7F40; /*FF6B40*/
+}
+
+#sidebar-cloud-icon {
+    vertical-align:middle; 
+    padding-bottom: 4px; 
+    padding-right: 5px;
+    color:aqua;
+}
+
+#download-button {
+    background: none;
+    border:none;
+    color:white;
+    font-size: 1vw;
+    font-family: 'Lato', sans-serif;
+}
+
+#download-button:hover {
+    color:aqua;
+    cursor:pointer;
+}
+
+.sidebar-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.sidebar-link:visited {
+  color: inherit;
+}
+
+.sidebar-link:hover {
+  color: inherit;
+}
+
+.sidebar-link:active {
+  color: inherit;
+}

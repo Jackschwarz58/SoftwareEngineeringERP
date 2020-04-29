@@ -1,0 +1,105 @@
+html, body {
+    margin:0;
+    height:100%;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+header {
+    border-bottom: 1px solid gray;
+    text-align: center;
+    font-size: 7vh;
+    padding-bottom: 1vh;
+    padding-top: 2vh;
+}
+
+nav {
+    flex: 8%;
+}
+
+footer {
+    height: 4vh;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 4vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    font-size: 2vh;
+    color: white;
+    background-color: #454545;
+    width 100%;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    height:100%;
+}
+
+.main {
+    width: 90%;
+    height 100%;
+    display:flex;
+    flex-direction: column;
+    background-color: #F4F4F5;
+}
+
+.inner {
+    padding:15px;
+    width: 97%;
+}
+
+.page-header {
+    font-size: 2.4vw;
+    padding-bottom: 20px;
+    padding-top:15px;
+    padding-left: 15px;
+    padding-right: 10px;
+    color: white;
+    background-color: #454545;
+    display:flex;
+}
+
+
+#banner-title {
+    width: 80%;
+}
+
+.banner-left {
+    width: 20%;
+}
+
+.banner-center {
+    width:60%;
+    text-align: center;
+    align-content: center;
+    display:flex;
+    justify-content: center;
+}
+
+.top-actions {
+    width: 20%;
+    text-align: right;
+    position:static;
+}
+
+.table-button {
+    background: white;
+    border: none;
+    padding: -10px;
+    color: #454545;
+    border-radius: 5px;
+    font-size: 2vw;
+    cursor:pointer;
+}
+
+.table-button:hover {
+    background: #808080;
+}
+
+.table-button-text {
+    font-size:.75vw;
+}
+

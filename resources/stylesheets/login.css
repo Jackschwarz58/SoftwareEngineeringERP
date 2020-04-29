@@ -110,3 +110,19 @@ footer {
     margin:20px 20px;
     cursor: pointer;
 }
+
+#enter-link {
+    color:aqua;
+    background: #3a3a3a;
+    border:none;
+    font-size:20px;
+    cursor:pointer;
+    margin:40px;
+    padding:10px;
+    text-decoration: none;
+    text-align: center;
+}
+
+#enter-link: visited {
+    text-decoration: none;
+}

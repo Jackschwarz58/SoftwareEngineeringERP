@@ -1,0 +1,62 @@
+.top-filter-button {
+    color:white;
+    background: #4f4f4f;
+    border:none;
+    font-size: 20px;
+    cursor:pointer;
+    width:5%;
+    margin-right:10px;
+}
+
+.top-filter-button:hover {
+    background:#808080;
+}
+
+#clear-filter-button {
+    width: 10%;
+}
+
+.tabulator-tableHolder {
+    max-height: 83vh; !important;
+}
+
+.table-filter {
+    padding:6px;
+    border:none;
+    float:left;
+    font-size:22px;
+    background:#4f4f4f;
+    color:white;
+    margin-right:10px;
+}
+
+.table-filter:focus {
+    background:#808080;
+}
+
+#table-field-list {
+    border-radius: 0;
+    width:15%;
+}
+
+#type-field-list {
+    width:20%;
+    height: 100%;
+    border-radius: 0;
+}
+
+select:not([multiple]) {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-position: right 50%;
+    background-repeat: no-repeat;
+    background-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1"><path d="M4 8L0 4h8z"/></svg>');
+}
+
+.table-dropdown {
+    border-right: 1px white;
+}
+
+#filter-field {
+    width: 40%;
+}
