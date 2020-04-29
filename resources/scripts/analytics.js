@@ -16,28 +16,32 @@ var salesInvRatio = {
     labels: new Array(),
     datasets: new Array()
 }
+function pullData() {
+    $.ajax({
+        url: "/file/pullSalesData",
+        method: 'GET',
+        async:false,
+        success: function(data){
+            salesData = data;
+            console.log('Received Sales Data');
+        }
+    });
 
-$.ajax({
-    url: "/file/pullSalesData",
-    method: 'GET',
-    async:false,
-    success: function(data){
-        salesData = data;
-        console.log('Received Sales Data');
-    }
-});
 
-$.ajax({
-    url: "/file/pullData",
-    method: 'GET',
-    async:false,
-    success: function(data){
-        inventoryData = data;
-        console.log('Received Inv Data');
-    }
-});
+    $.ajax({
+        url: "/file/pullData",
+        method: 'GET',
+        async:false,
+        success: function(data){
+            inventoryData = data;
+            console.log('Received Inv Data');
+        }
+    });
+}
 
 window.onload = function() {
+    pullData();
+
     getItemTotSales();
     getSalesSeperatedByDay();
     getSalesInvRatio();
@@ -86,7 +90,7 @@ function getItemTotSales() {
 }
 
 function getSalesInvRatio() {
-    var datasets =[];
+    var datasets = [];
     var inv ={
         name: "Inventory",
         chartType: 'bar',
@@ -100,20 +104,22 @@ function getSalesInvRatio() {
 
     for(var i = 0; i < itemSales.length; ++i) {
         sales.values.push(itemSales[i].sales); 
-        
+
         var invObj = search(itemSales[i].name, inventoryData);
         
-        
+        console.log("invObj: " + invObj);
+
         if(typeof invObj !== 'undefined') {
+            console.log("Got Here");
             inv.values.push(invObj.quan);
             salesInvRatio.labels.push(invObj.name);
         }
     }
     salesInvRatio.datasets.push(inv);
     salesInvRatio.datasets.push(sales);
-    
-    
-    //console.log(salesInvRatio);
+
+
+    console.log(salesInvRatio);
 }
 
 function isDateWithinRange(toCheck, minVal, maxVal) {
@@ -143,7 +149,7 @@ function search(nameKey, myArray){
 
 function createSalesRatio() {
     // Sales to Ratio Graph
-    let chart = new frappe.Chart( "#chart", { // or DOM element
+    var chart = new frappe.Chart( "#chart", { // or DOM element
         data: salesInvRatio,
 
         title: "Sales to Inventory Ratio",
@@ -154,7 +160,7 @@ function createSalesRatio() {
 
 function createProfitLoss() {
     // dummy chart for right module
-    let right = new frappe.Chart( "#right", { // or DOM element
+    var right = new frappe.Chart( "#right", { // or DOM element
         data: {
             labels: ["YS", "BS", "GS", "RS",
                      "BlJ", "NJ", "DJ", "FJ", "GrH", "CH", "MH"],
@@ -180,7 +186,7 @@ function createProfitLoss() {
 }
 
 function createForecastDemand() {
-    let regression = new frappe.Chart( "#regression", { // or DOM element
+    var regression = new frappe.Chart( "#regression", { // or DOM element
         data: {
             labels: ["YS", "BS", "GS", "RS",
                      "BlJ", "NJ", "DJ", "FJ", "GrH", "CH", "MH"],

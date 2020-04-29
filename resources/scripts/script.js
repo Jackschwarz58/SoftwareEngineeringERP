@@ -17,6 +17,11 @@ closeEdit.onclick =function() {
 
 closeEditButtons.onclick =function() {
     editModal.style.display = "none";
+    
+    document.getElementById("editNameInput").value = "";    
+    document.getElementById("editQuanInput").value = "";
+    document.getElementById("editPriceInput").value = "";
+    document.getElementById("editDescInput").value = "";
 }
 
 btn.onclick = function() {
@@ -29,6 +34,11 @@ span.onclick = function() {
 
 closeAddButtons.onclick = function() {
     modal.style.display = "none";
+
+    document.getElementById("add-name-field").value = "";    
+    document.getElementById("add-quan-field").value = "";
+    document.getElementById("add-price-field").value = "";
+    document.getElementById("add-desc-field").value = "";
 } 
 
 moreTagsButton.onclick = function() {

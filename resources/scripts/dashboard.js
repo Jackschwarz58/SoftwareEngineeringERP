@@ -1,6 +1,6 @@
 var salesModal = document.getElementById("salesModal");
-
 var salesData;
+var invDataNames;
 var salesWithinSevenWeeks = [];
 var monthAbbr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 var listOfPastSevenDates = [];
@@ -14,23 +14,38 @@ var topSellingWeeklyInvLabels = [];
 var topSellingWeeklyInvSales = [];
 var thisWeek = [];
 
-
-$.ajax({
-    url: "/file/pullSalesData",
-    method: 'GET',
-    async:false,
-    success: function(data){
-        salesData = data;
-    }
-});
+function pullSalesData() {
+    $.ajax({
+        url: "/file/pullSalesData",
+        method: 'GET',
+        async:false,
+        success: function(data){
+            salesData = data;
+            console.log(salesData);
+        }
+    });
+    
+     $.ajax({
+        url: "/file/pullInvDataNames",
+        method: 'GET',
+        async:false,
+        success: function(data){
+            invDataNames = data;
+            console.log(invDataNames);
+            autocomplete(document.getElementById("sale-name-field"), invDataNames);
+        }
+    });
+}
 
 window.onload = function() {
+    pullSalesData();
+    
     getWeeklySales();
     getChartLabels();
     getSalesPerWeekList();
     getQuanSoldWeeksChart();
     getTopSellingInventory();
-    
+
     createWeeklySalesChart();
     createTopSellingChart();
     createRecentSalesList()
@@ -48,7 +63,6 @@ function getWeeklySales() {
         }
     }
 }
-
 
 function addNewSale() {
     var itemName = document.getElementById("sale-name-field").value;
@@ -74,6 +88,10 @@ function addNewSale() {
 
     var newSale = {name: itemName,sold:amtSold, money:priceSold, dateReported: now};
     sendSalesData(newSale);
+    
+    document.getElementById("sale-name-field").value = "";
+    document.getElementById("sale-quan-field").value = "";
+    document.getElementById("sale-price-field").value = "";
 
     salesModal.style.display = "none";
 }
@@ -131,7 +149,7 @@ function getTopSellingInventory() {
     thisWeek = weekByWeekSales[dateLabels[dateLabels.length - 1]];
 
     thisWeek.sort(function(a, b) {
-        return parseInt(b.money) - parseInt(a.money);
+        return parseFloat(b.money) - parseFloat(a.money);
     });
 
     if(thisWeek.length >= 8)
@@ -141,7 +159,7 @@ function getTopSellingInventory() {
 
     for(var i = 0; i < thisWeek.length; ++i) {
         topSellingWeeklyInvLabels.push(thisWeek[i].name);
-        topSellingWeeklyInvSales.push(parseInt(thisWeek[i].money));
+        topSellingWeeklyInvSales.push(parseFloat(thisWeek[i].money));
     }
 }
 
@@ -171,11 +189,17 @@ function addSalesListData(num, name) {
 
 function createRecentSalesList() {
     var sortedByDate = salesData.sort(function(a, b) {
-        return parseInt(b.dateReported) - parseInt(a.dateReported);
+        return parseInt(a.dateReported) - parseInt(b.dateReported);
     });
-    
-    for(var i = 0; i < 9; ++i) {
-        addSalesListData(parseInt(sortedByDate[i].sold), sortedByDate[i].name);
+    if(sortedByDate.length < 9) {
+        for(var i = 0; i < sortedByDate.length; ++i) {
+            addSalesListData(parseInt(sortedByDate[i].sold), sortedByDate[i].name);
+        }
+    }
+    else {
+        for(var k = 0; k < 9; ++k) {
+            addSalesListData(parseInt(sortedByDate[k].sold), sortedByDate[k].name);
+        }
     }
 }
 
@@ -193,14 +217,14 @@ function createTopSellingChart() {
         type: 'bar', //'bar', 'line', 'scatter', 'pie', 'percentage'
         height: 200
     });
-    
+
     var salesSum = topSellingWeeklyInvSales.reduce(function(a, b){
         return a + b;
     }, 0);
-    
+
     document.getElementById("tot-sales-number").innerHTML = currencyFormat(salesSum);
 }
 
 function currencyFormat(num) {
-  return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
