@@ -4,13 +4,15 @@
         <title>ERP Project</title>
         <link rel="stylesheet" href="/stylesheets/reset.css">
         <link rel="stylesheet" href="/stylesheets/styles.css">
+        <link rel="stylesheet" href="/stylesheets/autocomplete.css">
         <link rel="stylesheet" href="/stylesheets/modal.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300&display=swap">
         <link rel="stylesheet" href="https://unpkg.com/tabulator-tables@4.5.3/dist/css/tabulator.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        
+
         <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.5.3/dist/js/tabulator.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript" src="/scripts/autocomplete.js" async></script>
         <script type="text/javascript" src="/scripts/fileClient.js" sync></script>
         <script type="text/javascript" src="/scripts/script.js" async></script>
         <script type="text/javascript" src="/scripts/tabs.js" async></script>
@@ -21,53 +23,55 @@
         <div id="addModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                
+
                 <div id="modal-header">
                     New Item...
                 </div>
-                
+
                 <div class="modal-input-content" id="name-input-content">
                     <span class="modal-subheading" id="name-subheading">Name:<span class="required-tag">* </span></span>
-                    <input placeholder="Name..." class="input-field" id="add-name-field" type="text" name="name">
+                    <div class="autocomplete">
+                        <input placeholder="Name..." class="input-field" id="add-name-field" type="text" name="name" autocomplete="off">
+                    </div>
                 </div>
-                
+
                 <div class="modal-input-content" id="nums-content">
                     <div id="quan-input-section">
                         <span class="modal-subheading" id="quan-subheading">Quantity:<span class="required-tag">* </span></span>
                         <input placeholder="10" class="input-field-number" id="add-quan-field" type="number" min="1">
                     </div>
-                    
+
                     <div id="price-input-section">
                         <span class="modal-subheading" id="price-subheading">Price <span class="price-qualifier">(USD)</span>:</span>
                         <input id="add-price-field" placeholder="19.99" class="input-field-number" type="number" min="0">
                     </div>
                 </div>
-                
+
                 <div class="modal-input-content" id="desc-input-content">
                     <span class="modal-subheading" id="description-subheading">Description: </span>
                     <textarea placeholder="Item Description..." class="input-field-large" id="add-desc-field" type="text" name="desc" rows="3" cols="50"></textarea>
                 </div>
-                
+
                 <div class="modal-input-content" id="tags-input-content">
                     <div id ="tags-top-row"><span class="modal-subheading" id="tags-subheading">Tags: </span>
                         <button type="button" class="more-button" id="more-tags-button">Add</button>
-                        </div>
+                    </div>
                     <div id="tag-field-container">
                         <input placeholder="Tag" class="input-field add-tags-field" type="text" name="tags" size="10"></div>
                 </div>
-                
+
                 <div class="modal-confirm-buttons">
                     <button class="modal-footer-button" id="confirmAdd" onclick="addNew()">Add</button>
                     <button class="modal-footer-button" id="cancelAdd">Cancel</button>
                 </div>
-                
+
             </div>
         </div>
 
         <div id="editModal" class="modal">
             <div class="modal-content">
                 <span class="close-edit">&times;</span>
-                
+
                 <div id="modal-header">
                     Edit Item...
                 </div>
@@ -82,26 +86,26 @@
                         <span class="modal-subheading" id="quan-subheading">Quantity: </span>
                         <input placeholder="10" class="input-field-number" id="editQuanInput" type="number" min="1">
                     </div>
-                    
+
                     <div id="price-input-section">
                         <span class="modal-subheading" id="price-subheading">Price <span class="price-qualifier">(USD)</span>:</span>
                         <input id="editPriceInput" placeholder="19.99" class="input-field-number" type="number" min="0">
                     </div>
                 </div>
-                
+
                 <div class="modal-input-content" id="desc-input-content">
                     <span class="modal-subheading" id="description-subheading">Description: </span>
                     <textarea placeholder="Item Description..." class="input-field-large" id="editDescInput" type="text" name="desc" rows="3" cols="50"></textarea>
                 </div>
-                
+
                 <div class="modal-input-content" id="tags-input-content">
                     <div id ="tags-top-row"><span class="modal-subheading" id="tags-subheading">Tags: </span>
                         <button type="button" class="more-button" id="more-tags-button-edit">Add</button>
-                        </div>
+                    </div>
                     <div id="tag-field-container">
                         <input placeholder="Tag" class="input-field" id="editTagsInput" type="text" name="tags" size="10"></div>
                 </div>
-                
+
                 <div class="modal-confirm-buttons">
                     <button class="modal-footer-button" id="remove-item-edit" onclick="removeItem()">Delete</button>
                     <button class="modal-footer-button" id="confirm-edit" onclick="applyEdit()">Apply</button>
@@ -109,7 +113,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class ="wrapper">    
 
             <!-- ////////////////////////////Main Sidebar//////////////////////////// -->
@@ -159,8 +163,6 @@
 
                     <div class="top-actions">
                         <button type="button" class="table-button" id="openAdd"><i class="material-icons" id="table-icon" title="Add Item">add</i><span class="table-button-text"></span></button>
-
-                        <button type="button" class="table-button"><i class="material-icons" id="table-icon" title="Delete Item">delete</i><span class="table-button-text"></span></button>
                     </div>
                 </div>
 

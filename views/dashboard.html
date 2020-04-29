@@ -4,6 +4,7 @@
         <link rel="stylesheet" href="/stylesheets/reset.css">
         <link rel="stylesheet" href="/stylesheets/styles.css">
         <link rel="stylesheet" href="/stylesheets/dashboard.css">
+        <link rel="stylesheet" href="/stylesheets/autocomplete.css">
         <link rel="stylesheet" href="/stylesheets/modal.css">
         <link rel="stylesheet" href="/stylesheets/salesModal.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300&display=swap">
@@ -13,61 +14,14 @@
         <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.5.3/dist/js/tabulator.min.js"></script>
         <script src="https://unpkg.com/frappe-charts@1.1.0/dist/frappe-charts.min.iife.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript" src="/scripts/autocomplete.js" async></script>
         <script type="text/javascript" src="scripts/fileClient.js"></script>
         <script type="text/javascript" src="scripts/dashboard.js" async></script>
-        <script type="text/javascript" src="scripts/sidebar.js" async></script>
         <script type="text/javascript" src="scripts/dashboardListeners.js" async></script>
-        <script type="text/javascript" src="scripts/tabs.js" async></script>
 
     </head>
     <body>
         <div class ="wrapper">    
-            <div id="addModal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-
-                    <div id="modal-header">
-                        New Item...
-                    </div>
-
-                    <div class="modal-input-content" id="name-input-content">
-                        <span class="modal-subheading" id="name-subheading">Name:<span class="required-tag">* </span></span>
-                        <input placeholder="Name..." class="input-field" id="add-name-field" type="text" name="name">
-                    </div>
-
-                    <div class="modal-input-content" id="nums-content">
-                        <div id="quan-input-section">
-                            <span class="modal-subheading" id="quan-subheading">Quantity:<span class="required-tag">* </span></span>
-                            <input placeholder="10" class="input-field-number" id="add-quan-field" type="number" min="1">
-                        </div>
-
-                        <div id="price-input-section">
-                            <span class="modal-subheading" id="price-subheading">Price <span class="price-qualifier">(USD)</span>:</span>
-                            <input id="add-price-field" placeholder="19.99" class="input-field-number" type="number" min="0">
-                        </div>
-                    </div>
-
-                    <div class="modal-input-content" id="desc-input-content">
-                        <span class="modal-subheading" id="description-subheading">Description: </span>
-                        <textarea placeholder="Item Description..." class="input-field-large" id="add-desc-field" type="text" name="desc" rows="3" cols="50"></textarea>
-                    </div>
-
-                    <div class="modal-input-content" id="tags-input-content">
-                        <div id ="tags-top-row"><span class="modal-subheading" id="tags-subheading">Tags: </span>
-                            <button type="button" class="more-button" id="more-tags-button">Add</button>
-                        </div>
-                        <div id="tag-field-container">
-                            <input placeholder="Tag" class="input-field add-tags-field" type="text" name="tags" size="10"></div>
-                    </div>
-
-                    <div class="modal-confirm-buttons">
-                        <button class="modal-footer-button" id="confirmAdd" onclick="addNew()">Add</button>
-                        <button class="modal-footer-button" id="cancelAdd">Cancel</button>
-                    </div>
-
-                </div>
-            </div>
-
             <div id="salesModal" class="modal">
                 <div class="modal-content">
                     <span id="closeSalesModal">&times;</span>
@@ -77,8 +31,12 @@
                     </div>
 
                     <div class="modal-input-content" id="name-input-content">
+
                         <span class="modal-subheading" id="name-subheading">Item Name:<span class="required-tag">* </span></span>
-                        <input placeholder="Item Name..." class="input-field" id="sale-name-field" type="text" name="name">
+                        
+                        <div class="autocomplete">
+                            <input placeholder="Item Name..." class="input-field" id="sale-name-field" type="text" name="name" autocomplete="off">
+                        </div>
                     </div>
 
                     <div class="modal-input-content" id="nums-content">
@@ -123,8 +81,6 @@
                     <div id="banner-title">Dashboard</div>
                     <div class="top-actions">
                         <button type="button" class="table-button" id="openSales"><i class="material-icons" id="table-icon" title="Report a Sale">monetization_on</i><span class="table-button-text"></span></button>
-
-                        <button type="button" class="table-button" id="openAdd"><i class="material-icons" id="table-icon" title="Add Inventory">note_add</i><span class="table-button-text"></span></button>
                     </div>
                 </div>
                 <div class="dashboard-inner">
