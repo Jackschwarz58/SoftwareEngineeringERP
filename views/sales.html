@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <script src="https://unpkg.com/frappe-charts@1.1.0/dist/frappe-charts.min.iife.js"></script>
-
-        <script type="text/javascript" src="scripts/analytics.js" async></script>
-        <script type="text/javascript" src="scripts/sidebar.js" async></script>
-
+        <meta charset="utf-8">
+        <title>Sales</title>
+        <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+        <link rel="icon" type="image/png" href="/images/favicon-48x48.png" sizes="48x48">
+        <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+        
         <link rel="stylesheet" href="/stylesheets/reset.css">
-        <link rel="stylesheet" href="/stylesheets/styles.css">
-        <link rel="stylesheet" href="/stylesheets/analytics.css">
-
+        <link rel="stylesheet" href="/stylesheets/sidebar.css">
+        <link rel="stylesheet" href="/stylesheets/index.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300&display=swap">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        
+        <script src="https://unpkg.com/frappe-charts@1.1.0/dist/frappe-charts.min.iife.js"></script>
+        <script type="text/javascript" src="scripts/sidebar.js" async></script>
+
+        
     </head>
     <body>
 
@@ -19,7 +24,7 @@
             <!-- ////////////////////////////Main Sidebar//////////////////////////// -->
             <div class = "sidebar">
                 <div class="site-title">
-                    <span style="color:aqua">ERP</span>Project
+                    <a href="/" id="title-link"><span style="color:aqua">ERP</span>Project</a>
                 </div>
                 <nav>
                     <div class="nav-link" id="activities"><i class="material-icons" id="sidebar-icon">dashboard</i>Dashboard</div>

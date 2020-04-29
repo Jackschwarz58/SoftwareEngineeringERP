@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta charset="utf-8">
+        <Title>Dashboard</Title>
+        <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+        <link rel="icon" type="image/png" href="/images/favicon-48x48.png" sizes="48x48">
+        <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+        
         <link rel="stylesheet" href="/stylesheets/reset.css">
-        <link rel="stylesheet" href="/stylesheets/styles.css">
+        <link rel="stylesheet" href="/stylesheets/index.css">
+        <link rel="stylesheet" href="/stylesheets/sidebar.css">
         <link rel="stylesheet" href="/stylesheets/dashboard.css">
         <link rel="stylesheet" href="/stylesheets/autocomplete.css">
-        <link rel="stylesheet" href="/stylesheets/modal.css">
         <link rel="stylesheet" href="/stylesheets/salesModal.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300&display=swap">
         <link rel="stylesheet" href="https://unpkg.com/tabulator-tables@4.5.3/dist/css/tabulator.min.css">
@@ -62,7 +68,7 @@
             <!-- ////////////////////////////Main Sidebar//////////////////////////// -->
             <div class = "sidebar">
                 <div class="site-title">
-                    <span style="color:aqua">ERP</span>Project
+                    <a href="/" id="title-link"><span style="color:aqua">ERP</span>Project</a>
                 </div>
                 <nav>
                     <div class="nav-link" id="activities"><i class="material-icons" id="sidebar-icon">dashboard</i>Dashboard</div>
@@ -95,7 +101,7 @@
                         </div>
                     </div>
 
-                    <div class="module" id="right-module"><div class="selling-title"><span class="module-title" id="left-module-title">Top Selling Inventory</span>   (Units in last week)<span id="tot-num-sales-text"><span id="sales-tot-title">Sales Total: </span><span id="tot-sales-number">[num placeholder]</span></span></div><div id="bar-chart"></div></div>
+                    <div class="module" id="right-module"><div class="selling-title"><span class="module-title" id="left-module-title">Top Selling Inventory</span>   (Units in last week)<span id="tot-num-sales-text"><span id="sales-tot-title">Weekly Sales Total: </span><span id="tot-sales-number">[num placeholder]</span></span></div><div id="bar-chart"></div></div>
                     <div class="module" id="bottom-module"></div>
                 </div>
             </div>
