@@ -178,3 +178,8 @@
     grid-row:2;
     width:50%;
 }
+
+#sale-name-field {
+    padding: 5px;
+    width: 99%;
+}
