@@ -77,7 +77,7 @@
                     <div class="nav-link" id="documents"><i class="material-icons" id="sidebar-icon"><a href="/documents.html" class="sidebar-link">insert_drive_file</i>Documents</a></div>
                 </nav>
                 <div class="sidebar-bottom">
-                    <button type="button" id="download-button"><i class="material-icons" id="sidebar-cloud-icon">cloud_download</i> <span>Download CSV</span></button>
+                    <button type="button" id="download-button-sales"><i class="material-icons" id="sidebar-cloud-icon">cloud_download</i> <span>Download CSV</span></button>
                 </div>
             </div>
             <!-- ////////////////////////////Main Sidebar End//////////////////////////// -->
@@ -91,7 +91,21 @@
                 </div>
                 <div class="inner">
                     <div class="column" id="left-column"><div id="sales-table-container"></div></div>
-                    <div class="column" id="right-column"><input placeholder="Item Name..." id="myInput" type="text" name="name" autocomplete="off"></div>
+                    <div class="column" id="right-column">
+                        <div class="sales-right-column" id="total-items-sold">
+                            <span class="right-label">Total Items Sold:</span>
+                        </div>
+                        <div class="sales-right-column" id="total-items-money">
+                            <span class="right-label">Total Earnings:</span>
+                        </div>
+                        <div class="sales-right-column" id="total-items-best-sell">
+                            <span class="right-label">Best Selling Item:</span>
+                        </div>
+                        <div class="sales-right-column" id="total-items-worst-sell">
+                            <span class="right-label">Worst Selling Item:</span>
+                        </div>
+                        
+                    </div>
                 </div>
             </div>
         </div>
