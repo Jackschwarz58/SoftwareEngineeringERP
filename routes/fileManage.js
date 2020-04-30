@@ -45,6 +45,7 @@ router.post('/sendData', function(req, res) {  //Send Sales Data to Client
 
 router.post('/sendSalesData', function(req, res) {  //Get Sales Data from Client
     var dataReceived = req.body;
+    console.log("Got New Sales Data");
 
     fs.readFile(path.resolve(__dirname, "../data/" + user + "sales.json"), function (err, data) {
         if(err) throw err;
@@ -61,8 +62,7 @@ router.post('/sendSalesData', function(req, res) {  //Get Sales Data from Client
 });
 
 router.get('/pullInvDataNames', function(req, res) { //Send Inventory Data to Client
-    console.log("Pulling Inv Data Names");
-    var names;
+    var names = [];
     var jsonArr;
 
     user = req.query.user;
@@ -73,7 +73,8 @@ router.get('/pullInvDataNames', function(req, res) { //Send Inventory Data to Cl
         if(err) throw err;
         var jsonArr = JSON.parse(data);
         names = jsonArr.map(function(jsonArr) {return jsonArr.name;}); 
-        return res.send(JSON.stringify(names));
+        
+        return res.send(names);
     });
 });
 
