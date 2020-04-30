@@ -18,5 +18,9 @@ router.get('/inventory.html', function(req, res, next) {
   res.render('inventory', { title: 'html' });
 });
 
+router.get('/sales.html', function(req, res, next) {
+  res.render('sales', { title: 'html' });
+});
+
 
 module.exports = router;
