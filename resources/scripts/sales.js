@@ -1,6 +1,8 @@
 var table;
 var salesData;
 var invDataNames;
+var setFilterButton = document.getElementById("search-filter-button");
+var clearFilterButton = document.getElementById("clear-filter-button");
 
 window.onload = function() {
     createSalesTable();
@@ -107,4 +109,18 @@ function setBestWorstSellingItem() {
 
 function currencyFormat(num) {
     return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+}
+
+setFilterButton.onclick = function() {
+    var searchTxt = document.getElementById("filter-field").value;
+    var categorySelection = document.getElementById("table-field-list").value;
+    var typeSelection = document.getElementById("type-field-list").value;        
+    
+    table.setFilter(categorySelection, typeSelection, searchTxt);
+}
+
+clearFilterButton.onclick = function() {
+    document.getElementById("filter-field").value ="";
+
+    table.clearFilter();
 }
