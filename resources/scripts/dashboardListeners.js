@@ -1,7 +1,7 @@
-var salesModal = document.getElementById("salesModal");
-var salesBtn = document.getElementById("openSales");
-var closeSales = document.getElementById("closeSalesModal");
-var cancelSaleButton = document.getElementById("cancelSale");
+var salesModal = document.getElementById("sales-modal");
+var salesBtn = document.getElementById("open-sales");
+var closeSales = document.getElementById("close-sales-modal");
+var cancelSaleButton = document.getElementById("cancel-sale");
 
 salesBtn.onclick = function() {
     salesModal.style.display = "block";
