@@ -34,7 +34,7 @@ window.onload = function() {
 function createTable() {
     table = new Tabulator("#table", {
         layout: "fitColumns", 
-        placeholder: "N/A",
+        placeholder: "No Data Received :(",
         rowClick:function(e, row){
             rowClicked = row.getData();
             rowClickedIndex = row.getIndex();
@@ -58,7 +58,7 @@ function createTable() {
             {title:"Quantity", field:"quan", width:100},
             {title:"Description",field:"desc"},
             {title:"Tags",field:"tags", width:180},
-            {title:"Pricing (USD)",field:"ex", width:200},
+            {title:"Price",field:"ex", width:200, formatter:"money", formatterParams: {symbol:"$"}},
         ],
     });
 }
