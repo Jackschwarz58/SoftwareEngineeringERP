@@ -34,15 +34,15 @@
     font-size:24px;
 }
 
-#closeSalesModal{
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+#close-sales-modal{
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
 }
 
-#closeSalesModal:hover,
-#closeSalesModal:focus{
+#close-sales-modal:hover,
+#close-sales-modal:focus{
   color: black;
   text-decoration: none;
   cursor: pointer;
@@ -71,7 +71,6 @@
     padding-bottom: 15px;
     border-bottom: 1px grey solid;
 }
-
 
 .modal-confirm-buttons {
     width:20%;
