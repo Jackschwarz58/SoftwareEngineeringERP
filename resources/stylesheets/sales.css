@@ -1,9 +1,11 @@
  .column {
   float: left;
-  width: 49.1%;
 }
 
-/* Clear floats after the columns */
+#sales-table-container {
+    height: 86vh;
+}
+
 .inner:after {
   content: "";
   display: table;
@@ -12,9 +14,25 @@
 
 #left-column {
     padding-right: 10px;
+    width: 78%;
 }
 
 #right-column {
     padding-left: 10px;
-    background-color: greenyellow;
+    width: 20.2%;
+    display:grid;
+    grid-row-gap:10px;
+}
+
+.right-label {
+    font-size: 20px;
+}
+
+.sales-right-column {
+    padding: 10px;
+}
+
+.data-text {
+    padding-top: 20px;
+    font-size: 28px;
 }

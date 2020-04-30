@@ -1,4 +1,4 @@
-var salesTable;
+var table;
 var salesData;
 var invDataNames;
 
@@ -7,18 +7,21 @@ window.onload = function() {
 
     pullSalesData();
     setAutocomplete("sale-name-field");
+    setTotalItemsSold();
+    setTotalEarnings();
+    setBestWorstSellingItem();
 }
 
 function createSalesTable() {
-    salesTable = new Tabulator("#sales-table-container", {
+    table = new Tabulator("#sales-table-container", {
         layout: "fitColumns",
         placeholder: ":( No Data Received (Refresh)",
         rowClick: function(e, row) {console.log("Row Name: \"" + row.getData().name + "\" Clicked!");},
         columns: [
-            {title: "Name", field:"name", width:200},
-            {title: "Units Sold", field:"sold", bottomCalc:"sum"},
-            {title: "Price", field:"money", bottomCalc:"sum", formatter:"money", formatterParams: {symbol:"$"}, bottomCalcParams:{precision: "2"}},
-            {title: "Sale Date", field:"dateReported", formatter:function(cell, formatterParams, onRendered) {
+            {title: "Name", field:"name", width:250},
+            {title: "Units Sold", field:"sold", width:100},
+            {title: "Price", field:"money", formatter:"money", formatterParams: {symbol:"$"}},
+            {title: "Date Reported", field:"dateReported", formatter:function(cell, formatterParams, onRendered) {
                 return moment(parseInt(cell.getValue())).format("M/D/YY h:mm a");
             }},
         ],
@@ -35,7 +38,7 @@ function pullSalesData() {
             console.log('Received Sales Data');
         }
     });
-    salesTable.setData(salesData);
+    table.setData(salesData);
 }
 
 function addNewSale() {
@@ -56,16 +59,52 @@ function addNewSale() {
             fieldsMissing += "    -Price\n"
 
         alert("Invalid Form: Missing one or more required fields:\n" + fieldsMissing);
-
         return;
     }
 
     var newSale = {name: itemName,sold:amtSold, money:priceSold, dateReported: now};
     sendSalesData(newSale);
-    
     document.getElementById("sale-name-field").value = "";
     document.getElementById("sale-quan-field").value = "";
     document.getElementById("sale-price-field").value = "";
-
     salesModal.style.display = "none";
+    location.reload();
+}
+
+function setTotalItemsSold() {
+    var sum = salesData.reduce(function(previousValue, currentValue) {
+        return {
+            sold: parseInt(previousValue.sold) + parseInt(currentValue.sold)
+        }
+    });
+    document.getElementById("total-items-sold").innerHTML += "<br> <div class=\"data-text\">" + sum.sold +"</span>";
+}
+
+function setTotalEarnings() {
+    var sum = salesData.reduce(function(previousValue, currentValue) {
+        return {
+            money: parseFloat(previousValue.money) + parseFloat(currentValue.money)
+        }
+    });
+    document.getElementById("total-items-money").innerHTML += "<br> <div class=\"data-text\">" + currencyFormat(parseFloat(sum.money)) +"</span>";
+}
+
+function setBestWorstSellingItem() {
+    var items = {};
+    for(var i = 0; i < salesData.length; ++i) {
+        //console.log(parseInt(salesData[i].sold));
+        if(!(salesData[i].name in items))
+            items[salesData[i].name] = parseInt(salesData[i].sold);
+        else
+            items[salesData[i].name] += parseInt(salesData[i].sold);
+    }
+    var best = Object.keys(items).reduce(function(a, b){ return items[a] > items[b] ? a : b });
+    document.getElementById("total-items-best-sell").innerHTML += "<br> <div class=\"data-text\">" + best +"</span>";
+    
+    var worst = Object.keys(items).reduce(function(a, b){ return items[a] < items[b] ? a : b });
+    document.getElementById("total-items-worst-sell").innerHTML += "<br> <div class=\"data-text\">" + worst +"</span>";
+}
+
+function currencyFormat(num) {
+    return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
