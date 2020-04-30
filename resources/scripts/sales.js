@@ -1,10 +1,12 @@
 var salesTable;
 var salesData;
+var invDataNames;
 
 window.onload = function() {
     createSalesTable();
-    
+
     pullSalesData();
+    setAutocomplete("sale-name-field");
 }
 
 function createSalesTable() {
@@ -24,7 +26,7 @@ function createSalesTable() {
 }
 
 function pullSalesData() {
-     $.ajax({
+    $.ajax({
         url: "/file/pullSalesData",
         method: 'GET',
         async:false,
@@ -33,5 +35,37 @@ function pullSalesData() {
             console.log('Received Sales Data');
         }
     });
-   salesTable.setData(salesData);
+    salesTable.setData(salesData);
+}
+
+function addNewSale() {
+    var itemName = document.getElementById("sale-name-field").value;
+    var amtSold = document.getElementById("sale-quan-field").value;
+    var priceSold = document.getElementById("sale-price-field").value;
+    var now = new Date().getTime();
+
+    if(itemName == "" || amtSold == "" || priceSold == ""){
+        console.log("A Field is Missing!");
+        var fieldsMissing ="";
+
+        if(itemName =="")
+            fieldsMissing += "    -Item Name\n"
+        if(amtSold =="")
+            fieldsMissing += "    -Amount Sold\n"
+        if(priceSold =="")
+            fieldsMissing += "    -Price\n"
+
+        alert("Invalid Form: Missing one or more required fields:\n" + fieldsMissing);
+
+        return;
+    }
+
+    var newSale = {name: itemName,sold:amtSold, money:priceSold, dateReported: now};
+    sendSalesData(newSale);
+    
+    document.getElementById("sale-name-field").value = "";
+    document.getElementById("sale-quan-field").value = "";
+    document.getElementById("sale-price-field").value = "";
+
+    salesModal.style.display = "none";
 }

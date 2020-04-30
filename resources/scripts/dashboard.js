@@ -24,22 +24,11 @@ function pullSalesData() {
             console.log(salesData);
         }
     });
-    
-     $.ajax({
-        url: "/file/pullInvDataNames",
-        method: 'GET',
-        async:false,
-        success: function(data){
-            invDataNames = data;
-            console.log(invDataNames);
-            autocomplete(document.getElementById("sale-name-field"), invDataNames);
-        }
-    });
 }
 
 window.onload = function() {
     pullSalesData();
-    
+
     getWeeklySales();
     getChartLabels();
     getSalesPerWeekList();
@@ -48,7 +37,9 @@ window.onload = function() {
 
     createWeeklySalesChart();
     createTopSellingChart();
-    createRecentSalesList()
+    createRecentSalesList();
+
+    setAutocomplete("sale-name-field");
 };
 
 function getWeeklySales() {
@@ -88,7 +79,7 @@ function addNewSale() {
 
     var newSale = {name: itemName,sold:amtSold, money:priceSold, dateReported: now};
     sendSalesData(newSale);
-    
+
     document.getElementById("sale-name-field").value = "";
     document.getElementById("sale-quan-field").value = "";
     document.getElementById("sale-price-field").value = "";
@@ -188,17 +179,16 @@ function addSalesListData(num, name) {
 }
 
 function createRecentSalesList() {
-    var sortedByDate = salesData.sort(function(a, b) {
-        return parseInt(a.dateReported) - parseInt(b.dateReported);
-    });
-    if(sortedByDate.length < 9) {
-        for(var i = 0; i < sortedByDate.length; ++i) {
+    var sortedByDate = salesData;
+
+    if(salesData.length > 8){
+        for(var i = salesData.length - 8; i < salesData.length; ++i) {
             addSalesListData(parseInt(sortedByDate[i].sold), sortedByDate[i].name);
         }
     }
     else {
-        for(var k = 0; k < 9; ++k) {
-            addSalesListData(parseInt(sortedByDate[k].sold), sortedByDate[k].name);
+        for(var i = salesData.length; i >= 0; --i) {
+            addSalesListData(parseInt(sortedByDate[i].sold), sortedByDate[i].name);
         }
     }
 }

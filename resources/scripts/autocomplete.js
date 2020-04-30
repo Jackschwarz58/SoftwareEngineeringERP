@@ -1,3 +1,21 @@
+var invDataNames;
+
+function setAutocomplete(inputName) {
+    pullNames();
+    autocomplete(document.getElementById(inputName),invDataNames);
+}
+
+function pullNames() {
+    $.ajax({
+        url: "/file/pullInvDataNames",
+        method: 'GET',
+        async:false,
+        success: function(data){
+            invDataNames = data;
+        }
+    });
+}
+
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
   the text field element and an array of possible autocompleted values:*/

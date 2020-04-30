@@ -9,32 +9,17 @@ var table;
 var setFilterButton = document.getElementById("search-filter-button");
 var clearFilterButton = document.getElementById("clear-filter-button");
 
-function pullInvNameData() {
-    $.ajax({
-        url: "/file/pullInvDataNames",
-        method: 'GET',
-        async:false,
-        success: function(data){
-            invNames = data;
-            console.log("Successfully pulled item names" + data);
-            autocomplete(document.getElementById("add-name-field"), invNames);
-        },
-        error: function (err) {
-           console.log(err);
-      },
-    });
-}
-
 window.onload = function() {
     createTable();
     table.setData("/file/pullData");
-    pullInvNameData();
+    setAutocomplete("add-name-field");
+    setAutocomplete("editNameInput");
 }
 
 function createTable() {
     table = new Tabulator("#table", {
         layout: "fitColumns", 
-        placeholder: "No Data Received :(",
+        placeholder: ":( No Data Received (Refresh)",
         rowClick:function(e, row){
             rowClicked = row.getData();
             rowClickedIndex = row.getIndex();
