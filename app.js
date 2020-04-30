@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var moment = require('moment');
 
 var indexRouter = require('./routes/index');
 var fileRouter = require('./routes/fileManage');
@@ -19,6 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'resources')));
 app.use(express.static('data'));
+
 
 app.use('/', indexRouter);
 app.use('/file', fileRouter);
