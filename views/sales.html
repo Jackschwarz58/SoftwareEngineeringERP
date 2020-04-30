@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Sales</title>
+        <title>Sales</title>        
         <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
         <link rel="icon" type="image/png" href="/images/favicon-48x48.png" sizes="48x48">
         <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
@@ -10,11 +10,15 @@
         <link rel="stylesheet" href="/stylesheets/reset.css">
         <link rel="stylesheet" href="/stylesheets/sidebar.css">
         <link rel="stylesheet" href="/stylesheets/index.css">
+        <link rel="stylesheet" href="/stylesheets/sales.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300&display=swap">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://unpkg.com/tabulator-tables@4.5.3/dist/css/tabulator.min.css">
         
-        <script src="https://unpkg.com/frappe-charts@1.1.0/dist/frappe-charts.min.iife.js"></script>
-        <script type="text/javascript" src="scripts/sidebar.js" async></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.5.3/dist/js/tabulator.min.js"></script>
+        <script type="text/javascript" src="/scripts/sidebar.js" async></script>
+        <script type="text/javascript" src="/scripts/sales.js" async></script>
 
         
     </head>
@@ -44,12 +48,12 @@
                 <div class="page-header" id="dashboard-banner">
                     <div id="banner-title">Sales</div>
                     <div class="top-actions">
-                        <!--<button type="button" class="table-button" id="openAdd"><i class="material-icons" id="table-icon" title="Report a Sale">receipt</i><span class="table-button-text"></span></button>
-                        
-                        <button type="button" class="table-button"><i class="material-icons" id="table-icon" title="Add Inventory">note_add</i><span class="table-button-text"></span></button>-->
+                        <button type="button" class="table-button" id="sales"><i class="material-icons" id="table-icon" title="Report a Sale">monetization_on</i></button>
                     </div>
                 </div>
-                <div class="sales-inner">
+                <div class="inner">
+                    <div class="column" id="left-column"><div id="sales-table-container"></div></div>
+                    <div class="column" id="right-column">Hello2</div>
                 </div>
             </div>
         </div>

@@ -1,0 +1,20 @@
+ .column {
+  float: left;
+  width: 49.1%;
+}
+
+/* Clear floats after the columns */
+.inner:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#left-column {
+    padding-right: 10px;
+}
+
+#right-column {
+    padding-left: 10px;
+    background-color: greenyellow;
+}
